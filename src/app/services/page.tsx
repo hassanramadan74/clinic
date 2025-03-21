@@ -1,6 +1,6 @@
 import ImageSlider from '@/Components/ImageSlider'
-import SpecificService from '@/Components/SpecificService'
 import SideSlider from "@/Components/SideSlider"
+import SpecificService from '@/Components/SpecificService'
 
 import React from 'react'
 

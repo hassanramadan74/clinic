@@ -1,9 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import type React from "react"
+
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { Star, ChevronLeft, ChevronRight } from "lucide-react"
-import google from "../../public/googleImg.png"
+import { useMediaQuery } from "@/hooks/use-media-query"
+import { motion, AnimatePresence } from "framer-motion"
 
 interface Testimonial {
   id: number
@@ -64,14 +67,31 @@ export default function TestimonialSlider() {
     },
   ]
 
+  const isDesktop = useMediaQuery("(min-width: 1024px)")
+  const isTablet = useMediaQuery("(min-width: 640px)")
+
+  const getVisibleCount = () => {
+    if (isDesktop) return 3
+    if (isTablet) return 2
+    return 1
+  }
+
   const [currentIndex, setCurrentIndex] = useState(0)
-  const maxIndex = testimonials.length - 3 // Show 3 testimonials at a time
+  const [visibleCount, setVisibleCount] = useState(getVisibleCount())
+  const [direction, setDirection] = useState(0) // -1 for left, 1 for right
+  const maxIndex = testimonials.length - visibleCount
+
+  useEffect(() => {
+    setVisibleCount(getVisibleCount())
+  }, [isDesktop, isTablet])
 
   const nextSlide = () => {
+    setDirection(1)
     setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1))
   }
 
   const prevSlide = () => {
+    setDirection(-1)
     setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1))
   }
 
@@ -82,27 +102,208 @@ export default function TestimonialSlider() {
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [currentIndex])
+  }, [currentIndex, maxIndex])
+
+  // Swipe functionality for mobile
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current - touchEndX.current > 50) {
+      // Swipe left
+      nextSlide()
+    }
+
+    if (touchEndX.current - touchStartX.current > 50) {
+      // Swipe right
+      prevSlide()
+    }
+  }
+
+  // Animation variants
+  const sectionVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+        duration: 0.6,
+      },
+    },
+  }
+
+  const headingVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  }
+
+  const ratingVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+        delay: 0.2,
+      },
+    },
+  }
+
+  const starVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: (i: number) => ({
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: 0.3 + i * 0.1,
+        duration: 0.3,
+        type: "spring",
+        stiffness: 200,
+      },
+    }),
+  }
+
+  const cardVariants = {
+    hidden: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.8,
+    }),
+    visible: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        duration: 0.5,
+      },
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? -300 : 300,
+      opacity: 0,
+      scale: 0.8,
+      transition: {
+        duration: 0.3,
+      },
+    }),
+    hover: {
+      y: -5,
+      boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
+      transition: {
+        duration: 0.3,
+      },
+    },
+  }
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.8,
+        duration: 0.5,
+      },
+    },
+    hover: {
+      scale: 1.05,
+      boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10,
+      },
+    },
+    tap: { scale: 0.95 },
+  }
+
+  const arrowVariants = {
+    hover: {
+      scale: 1.2,
+      backgroundColor: "rgba(255, 255, 255, 1)",
+      transition: {
+        duration: 0.2,
+      },
+    },
+    tap: { scale: 0.9 },
+  }
 
   return (
-    <section className="py-16 bg-white">
+    <motion.section
+      className="py-8 md:py-12 lg:py-16 bg-white"
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-[#2c4755] mb-8">Here is what our customers say</h2>
+        <div className="text-center mb-8 md:mb-12">
+          <motion.h2 className="text-2xl md:text-3xl font-bold text-[#2c4755] mb-6 md:mb-8" variants={headingVariants}>
+            Here is what our customers say
+          </motion.h2>
 
           {/* Google Review Rating */}
-          <div className="flex flex-col items-center justify-center mb-10">
-            <h3 className="text-xl font-bold mb-2">EXCELLENT</h3>
+          <motion.div className="flex flex-col items-center justify-center mb-6 md:mb-10" variants={ratingVariants}>
+            <motion.h3
+              className="text-lg md:text-xl font-bold mb-2"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              EXCELLENT
+            </motion.h3>
             <div className="flex mb-1">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                <motion.div
+                  key={i}
+                  custom={i}
+                  variants={starVariants}
+                  whileHover={{ scale: 1.2, rotate: [0, -5, 5, 0], transition: { duration: 0.3 } }}
+                >
+                  <Star className="w-5 h-5 md:w-6 md:h-6 fill-yellow-400 text-yellow-400" />
+                </motion.div>
               ))}
             </div>
-            <p className="text-sm text-gray-600 mb-1">
+            <motion.p
+              className="text-sm text-gray-600 mb-1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+            >
               Based on <strong>reviews</strong>
-            </p>
-            <div className="google-logo">
-              <svg xmlns="http://www.w3.org/2000/svg" width="80" height="25" viewBox="0 0 272 92">
+            </motion.p>
+            <motion.div
+              className="google-logo"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="70"
+                height="22"
+                viewBox="0 0 272 92"
+                className="md:w-[80px] md:h-[25px]"
+              >
                 <path
                   fill="#EA4335"
                   d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"
@@ -125,74 +326,158 @@ export default function TestimonialSlider() {
                   d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-20.49.01z"
                 />
               </svg>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Testimonial Slider */}
-          <div className="relative">
+          <div
+            className="relative px-8 md:px-12"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             {/* Navigation Arrows */}
-            <button
+            <motion.button
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-md hover:bg-white transition-all"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-1 md:p-2 shadow-md hover:bg-white transition-all"
               aria-label="Previous testimonial"
+              variants={arrowVariants}
+              whileHover="hover"
+              whileTap="tap"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1 }}
             >
-              <ChevronLeft className="h-6 w-6 text-[#2c4755]" />
-            </button>
+              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-[#2c4755]" />
+            </motion.button>
 
-            <div className="flex justify-center gap-6 overflow-hidden">
-              {testimonials.slice(currentIndex, currentIndex + 3).map((testimonial) => (
-                <div key={testimonial.id} className="bg-gray-50 rounded-lg p-6 shadow-sm w-full max-w-xs flex flex-col">
-                  <div className="flex items-center mb-4">
-                    {testimonial.avatar ? (
-                      <Image
-                        src={testimonial.avatar || "/placeholder.svg"}
-                        alt={testimonial.name}
-                        width={40}
-                        height={40}
-                        className="rounded-full mr-3"
-                      />
-                    ) : (
-                      <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white mr-3">
-                        {testimonial.name.charAt(0)}
-                      </div>
-                    )}
-                    <div>
-                      <p className="font-medium text-sm">{testimonial.name}</p>
-                      <p className="text-xs text-gray-500">{testimonial.date}</p>
+            <div className="flex justify-center gap-3 md:gap-6 overflow-hidden">
+              <AnimatePresence initial={false} custom={direction} mode="wait">
+                {testimonials.slice(currentIndex, currentIndex + visibleCount).map((testimonial) => (
+                  <motion.div
+                    key={testimonial.id}
+                    className="bg-gray-50 rounded-lg p-3 md:p-6 shadow-sm w-full flex flex-col min-h-[250px]"
+                    custom={direction}
+                    variants={cardVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    whileHover="hover"
+                    layout
+                  >
+                    <div className="flex items-center justify-between mb-3 md:mb-4">
+                      {testimonial.avatar ? (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.2, type: "spring" }}
+                        >
+                          <Image
+                            src={testimonial.avatar || "/placeholder.svg"}
+                            alt={testimonial.name}
+                            width={40}
+                            height={40}
+                            className="rounded-full mr-2 md:mr-3 w-8 h-8 md:w-10 md:h-10"
+                          />
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-purple-600 flex items-center justify-center text-white mr-2 md:mr-3 text-xs md:text-sm"
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.2, type: "spring" }}
+                        >
+                          {testimonial.name.charAt(0)}
+                        </motion.div>
+                      )}
+                      <motion.div
+                        className="flex flex-col"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.3 }}
+                      >
+                        <p className="font-medium text-xs md:text-sm">{testimonial.name}</p>
+                        <p className="text-[10px] md:text-xs text-gray-500">{testimonial.date}</p>
+                      </motion.div>
                     </div>
-                    <div className="ml-auto">
-                        <Image src={google} alt="verified" className="w-7 h-77" />
-                    </div>
-                  </div>
 
-                  <div className="flex mb-3 justify-center">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                    {testimonial.verified && <span className="ml-2 text-white flex items-center justify-center text-xs bg-blue-500 w-5 h-5 rounded-full" >✓</span>}
-                  </div>
+                    <motion.div
+                      className="flex mb-2 md:mb-3 justify-center"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.4 + i * 0.1 }}
+                        >
+                          <Star className="w-3 h-3 md:w-4 md:h-4 fill-yellow-400 text-yellow-400" />
+                        </motion.div>
+                      ))}
+                      {testimonial.verified && (
+                        <motion.span
+                          className="ml-1 md:ml-2 text-white flex items-center justify-center text-[8px] md:text-xs bg-blue-500 w-4 h-4 md:w-5 md:h-5 rounded-full"
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.9, type: "spring" }}
+                        >
+                          ✓
+                        </motion.span>
+                      )}
+                    </motion.div>
 
-                  <p className="text-sm flex-grow mb-3">{testimonial.text}</p>
+                    <motion.p
+                      className="text-xs md:text-sm flex-grow mb-2 md:mb-3 line-clamp-4 md:line-clamp-none"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      {testimonial.text}
+                    </motion.p>
 
-                  <button className="text-sm text-gray-500 self-start hover:text-[#2c4755]">Read more</button>
-                </div>
-              ))}
+                    <motion.button
+                      className="text-xs md:text-sm text-gray-500 self-start hover:text-[#2c4755]"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.6 }}
+                      whileHover={{ scale: 1.05, x: 3 }}
+                    >
+                      Read more
+                    </motion.button>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
 
-            <button
+            <motion.button
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-md hover:bg-white transition-all"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-1 md:p-2 shadow-md hover:bg-white transition-all"
               aria-label="Next testimonial"
+              variants={arrowVariants}
+              whileHover="hover"
+              whileTap="tap"
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1 }}
             >
-              <ChevronRight className="h-6 w-6 text-[#2c4755]" />
-            </button>
+              <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-[#2c4755]" />
+            </motion.button>
           </div>
 
-          <button className="bg-[#2c4755] hover:bg-[#1d3644] mt-8 text-white rounded-full px-6 py-4 text-[17px] font-medium font-montserrat cursor-pointer">
-              More Details
-            </button>        </div>
+          <motion.button
+            className="bg-[#2c4755] hover:bg-[#1d3644] mt-6 md:mt-8 text-white rounded-full px-4 py-2 md:px-6 md:py-4 text-sm md:text-[17px] font-medium cursor-pointer"
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
+          >
+            More Details
+          </motion.button>
+        </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

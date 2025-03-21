@@ -1,17 +1,18 @@
 "use client"
-import React from "react"
+import type React from "react"
 import Image from "next/image"
-import filler from '../../public/filler.png'
-import botox from '../../public/botox.png'
-import skin from '../../public/skin.png'
-import hair from '../../public/hair.png'
-import chemical from '../../public/chemical.png'
-import derma from '../../public/derma.png'
+import { motion } from "framer-motion"
+import filler from "../../public/filler.png"
+import botox from "../../public/botox.png"
+import skin from "../../public/skin.png"
+import hair from "../../public/hair.png"
+import chemical from "../../public/chemical.png"
+import derma from "../../public/derma.png"
 
 interface ServiceItem {
   id: string
   title: string
-  productImg: StaticImageData
+
   description: React.ReactNode
   showDetails?: boolean
 }
@@ -21,7 +22,7 @@ function SpecificService() {
     {
       id: "fillers",
       title: "Fillers",
-      productImg: filler,
+
       description: (
         <>
           <p className="mb-4">
@@ -39,7 +40,7 @@ function SpecificService() {
     {
       id: "botox",
       title: "Botox",
-      productImg: botox,
+
       description: (
         <>
           <p className="mb-4">
@@ -51,8 +52,8 @@ function SpecificService() {
             temporarily relax the underlying muscles.
           </p>
           <p>
-            As a result, the appearance of crow's feet, forehead lines, and frown lines can be significantly reduced,
-            giving you a more refreshed and rejuvenated look.
+            As a result, the appearance of crow&apos;s feet, forehead lines, and frown lines can be significantly
+            reduced, giving you a more refreshed and rejuvenated look.
           </p>
         </>
       ),
@@ -61,7 +62,6 @@ function SpecificService() {
     {
       id: "skin-boosters",
       title: "Skin Boosters",
-      productImg: skin,
       description: (
         <>
           <p className="mb-4">
@@ -80,20 +80,22 @@ function SpecificService() {
     {
       id: "dermapen",
       title: "Dermapen",
-      productImg: derma,
       description: (
         <>
           <p className="mb-4">
             Dermapen utilizes advanced micro-needling technology to stimulate collagen production and cellular renewal.
           </p>
           <p className="mb-4">
-            The treatment involves a pen-like device with tiny needles that create controlled micro-injuries in the skin.
+            The treatment involves a pen-like device with tiny needles that create controlled micro-injuries in the
+            skin.
           </p>
           <p className="mb-4">
-            These micro-injuries trigger the body’s natural healing response, leading to the production of new collagen and elastin fibers.
+            These micro-injuries trigger the body natural healing response, leading to the production of new collagen
+            and elastin fibers.
           </p>
           <p>
-            The Dermapen treatment is effective in addressing various skin concerns, including fine lines, wrinkles, acne scars, and uneven skin texture. It is suitable for all skin types and requires minimal downtime.
+            The Dermapen treatment is effective in addressing various skin concerns, including fine lines, wrinkles,
+            acne scars, and uneven skin texture. It is suitable for all skin types and requires minimal downtime.
           </p>
         </>
       ),
@@ -102,20 +104,21 @@ function SpecificService() {
     {
       id: "cold-peel",
       title: "Cold Peel",
-      productImg: chemical,
       description: (
         <>
           <p className="mb-4">
             The Cold Peel is a non-invasive procedure that combines the power of exfoliation and cold therapy.
           </p>
           <p className="mb-4">
-            It involves the application of a specially formulated solution that gently removes dead skin cells, unclogs pores, and evens out skin tone.
+            It involves the application of a specially formulated solution that gently removes dead skin cells, unclogs
+            pores, and evens out skin tone.
           </p>
           <p className="mb-4">
             The cold therapy component soothes and calms the skin, reducing redness and inflammation.
           </p>
           <p>
-            This treatment is suitable for all skin types and can address various concerns, such as dullness, uneven skin tone, and texture irregularities.
+            This treatment is suitable for all skin types and can address various concerns, such as dullness, uneven
+            skin tone, and texture irregularities.
           </p>
         </>
       ),
@@ -123,15 +126,17 @@ function SpecificService() {
     },
     {
       id: "hair-treatment",
-      productImg: hair,
       title: "Hair Treatment",
       description: (
         <>
           <p className="mb-4">
-            Hair treatments are designed to improve the quality of your hair. This is done through various ways, which include moisturizing the hair from the inside out, restoring and protecting your scalp, and boosting hair growth.
+            Hair treatments are designed to improve the quality of your hair. This is done through various ways, which
+            include moisturizing the hair from the inside out, restoring and protecting your scalp, and boosting hair
+            growth.
           </p>
           <p className="mb-4">
-            Depending on your hair type and health, there are many types of hair treatments, and we’ll advise you on which type will be suitable for your hair.
+            Depending on your hair type and health, there are many types of hair treatments, and we  advise you on
+            which type will be suitable for your hair.
           </p>
         </>
       ),
@@ -139,43 +144,164 @@ function SpecificService() {
     },
   ]
 
+  // Animation variants
+  const sectionVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+        duration: 0.6,
+      },
+    },
+  }
+
+  const headingVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+      },
+    },
+  }
+
+  const subheadingVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        delay: 0.2,
+      },
+    },
+  }
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        delay: 0.3 + i * 0.1,
+      },
+    }),
+    hover: {
+      y: -10,
+      boxShadow: "0px 20px 25px rgba(0, 0, 0, 0.15)",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 15,
+      },
+    },
+  }
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 15,
+        delay: 0.2,
+      },
+    },
+    hover: {
+      scale: 1.1,
+      rotate: 5,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 15,
+      },
+    },
+  }
+
+  const textVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.4,
+        duration: 0.6,
+      },
+    },
+  }
+
   return (
-    <section className="py-16 bg-white">
+    <motion.section
+      className="py-16 bg-white"
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-6xl font-bold text-[#2c4755] mb-2">SERVICES</h2>
-          <p className="text-gray-600 text-2xl">We Provide The Following Services</p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
-          {services.map((service) => (
-            <div key={service.id} className="flex justify-center hover:scale-110 transition-all duration-300 flex-col items-center">
-              <Image
-                src={service.productImg}
-                alt={service.title}
-                width={100}
-                height={100}
-                className="rounded-lg"
-              />
-              <h3 className="font-bold text-2xl text-center mt-2">{service.title}</h3>
-            </div>
-          ))}
+          <motion.h2 className="text-6xl font-bold text-[#2c4755] mb-2" variants={headingVariants}>
+            SERVICES
+          </motion.h2>
+          <motion.p className="text-gray-600 text-2xl" variants={subheadingVariants}>
+            We Provide The Following Services
+          </motion.p>
         </div>
 
         {/* Service Details */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services
             .filter((service) => service.showDetails)
-            .map((service) => (
-              <div key={`${service.id}-details`} className="border border-gray-200 rounded-xl p-6 text-center shadow-xl">
-                <h3 className="text-2xl font-semibold text-[#4a9cca] mb-6">{service.title}</h3>
-                <div className="text-gray-600 text-xl font-medium">{service.description}</div>
-              </div>
+            .map((service, index) => (
+              <motion.div
+                key={`${service.id}-details`}
+                className="border border-gray-200 rounded-xl p-6 text-center shadow-xl overflow-hidden"
+                custom={index}
+                variants={cardVariants}
+                whileHover="hover"
+                initial="hidden"
+                animate="visible"
+              >
+
+                <motion.h3
+                  className="text-2xl font-semibold text-[#4a9cca] mb-6"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
+                >
+                  {service.title}
+                </motion.h3>
+                <motion.div className="text-gray-600 text-xl font-medium" variants={textVariants}>
+                  {service.description}
+                </motion.div>
+                <motion.button
+                  className="mt-6 bg-[#2c4755] hover:bg-[#1d3644] text-white rounded-full px-6 py-3 text-lg font-medium cursor-pointer"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+                  whileHover={{ scale: 1.05, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Learn More
+                </motion.button>
+              </motion.div>
             ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 
 export default SpecificService
+
