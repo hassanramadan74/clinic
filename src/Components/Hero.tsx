@@ -1,8 +1,7 @@
-"use client"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import doctor from '../../public/doctor.webp'
-
+"use client";
+import Image from "next/image";
+import { motion } from "motion/react";
+import doctor from "../../public/doctor.webp";
 
 const details = {
   name: "Dr. Rehab Zakaria",
@@ -13,7 +12,7 @@ const details = {
     "Certified Trainer",
     "Master Injector",
   ],
-}
+};
 
 function Hero() {
   // Animation variants
@@ -26,7 +25,7 @@ function Hero() {
         delayChildren: 0.3,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -39,7 +38,7 @@ function Hero() {
         damping: 10,
       },
     },
-  }
+  };
 
   const imageVariants = {
     hidden: { scale: 0.8, opacity: 0 },
@@ -53,7 +52,7 @@ function Hero() {
         duration: 0.8,
       },
     },
-  }
+  };
 
   const qualificationVariants = {
     hidden: { x: -50, opacity: 0 },
@@ -66,7 +65,7 @@ function Hero() {
         stiffness: 100,
       },
     }),
-  }
+  };
 
   const buttonVariants = {
     hidden: { scale: 0, opacity: 0 },
@@ -90,7 +89,7 @@ function Hero() {
       },
     },
     tap: { scale: 0.95 },
-  }
+  };
 
   const waveVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -103,13 +102,18 @@ function Hero() {
         ease: "easeOut",
       },
     },
-  }
+  };
 
   return (
     <div className="relative w-full overflow-hidden bg-white">
       <div className="container px-4 py-12 mx-auto">
         <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-4">
-          <motion.div className="max-w-2xl" variants={containerVariants} initial="hidden" animate="visible">
+          <motion.div
+            className="max-w-2xl"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <motion.h1
               className="text-[40px] font-montserrat md:text-[55px] font-[1000] text-[#2c4755] mb-2"
               variants={itemVariants}
@@ -117,15 +121,27 @@ function Hero() {
               {details?.name}
             </motion.h1>
 
-            <motion.h2 className="text-[30px] font-[1000] font-montserrat text-[#2c4755] mb-6" variants={itemVariants}>
+            <motion.h2
+              className="text-[30px] font-[1000] font-montserrat text-[#2c4755] mb-6"
+              variants={itemVariants}
+            >
               {details?.title}
             </motion.h2>
 
             <motion.ul className="space-y-2 mb-8" variants={containerVariants}>
               {details?.qualifications.map((qualification, index) => (
-                <motion.li key={index} className="flex items-center" custom={index} variants={qualificationVariants}>
-                  <span className="text-[#2c4755] font-bold font-montserrat text-[20px] mr-2 mt-1">•</span>
-                  <span className="text-[#2c4755] font-medium font-montserrat text-[20px]">{qualification}</span>
+                <motion.li
+                  key={index}
+                  className="flex items-center"
+                  custom={index}
+                  variants={qualificationVariants}
+                >
+                  <span className="text-[#2c4755] font-bold font-montserrat text-[20px] mr-2 mt-1">
+                    •
+                  </span>
+                  <span className="text-[#2c4755] font-medium font-montserrat text-[20px]">
+                    {qualification}
+                  </span>
                 </motion.li>
               ))}
             </motion.ul>
@@ -164,7 +180,12 @@ function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <svg id="wave" viewBox="0 0 1440 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          id="wave"
+          viewBox="0 0 1440 100"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <defs>
             <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
               <stop stopColor="rgba(242, 242, 242, 1)" offset="0%"></stop>
@@ -178,8 +199,7 @@ function Hero() {
         </svg>
       </motion.div>
     </div>
-  )
+  );
 }
 
-export default Hero
-
+export default Hero;

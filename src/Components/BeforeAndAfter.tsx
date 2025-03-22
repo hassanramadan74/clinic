@@ -1,23 +1,23 @@
-"use client"
-import React from "react"
-import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
-import { Dialog, DialogContent } from "@/Components/ui/dialog"
-import fillerJob from "../../public/fillerJob.png"
-import fillerAlso from "../../public/fillerAlso.png"
-import jawLine from "../../public/jawLine.png"
-import lipFiller from "../../public/lipFiller.png"
+"use client";
+import React from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "motion/react";
+import { Dialog, DialogContent } from "@/Components/ui/dialog";
+import fillerJob from "../../public/fillerJob.png";
+import fillerAlso from "../../public/fillerAlso.png";
+import jawLine from "../../public/jawLine.png";
+import lipFiller from "../../public/lipFiller.png";
 
 interface BeforeAfterItem {
-  id: number
-  title: string
-  image: any
-  category: string
+  id: number;
+  title: string;
+  image: any;
+  category: string;
 }
 
 function BeforeAndAfter() {
-  const [selectedImage, setSelectedImage] = React.useState<any | null>(null)
-  const [selectedTitle, setSelectedTitle] = React.useState<string>("")
+  const [selectedImage, setSelectedImage] = React.useState<any | null>(null);
+  const [selectedTitle, setSelectedTitle] = React.useState<string>("");
 
   const beforeAfterItems: BeforeAfterItem[] = [
     {
@@ -44,7 +44,7 @@ function BeforeAndAfter() {
       image: fillerJob,
       category: "Fillers",
     },
-  ]
+  ];
 
   // Animation variants
   const sectionVariants = {
@@ -57,7 +57,7 @@ function BeforeAndAfter() {
         duration: 0.6,
       },
     },
-  }
+  };
 
   const titleVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -70,7 +70,7 @@ function BeforeAndAfter() {
         damping: 15,
       },
     },
-  }
+  };
 
   const subtitleVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -84,7 +84,7 @@ function BeforeAndAfter() {
         delay: 0.2,
       },
     },
-  }
+  };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -113,7 +113,7 @@ function BeforeAndAfter() {
         duration: 0.1,
       },
     },
-  }
+  };
 
   const imageVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -127,7 +127,7 @@ function BeforeAndAfter() {
         delay: 0.2,
       },
     },
-  }
+  };
 
   const dialogImageVariants = {
     hidden: { opacity: 0, scale: 0.5 },
@@ -147,7 +147,7 @@ function BeforeAndAfter() {
         duration: 0.3,
       },
     },
-  }
+  };
 
   const lineVariants = {
     hidden: { width: 0 },
@@ -158,7 +158,7 @@ function BeforeAndAfter() {
         ease: "easeOut",
       },
     },
-  }
+  };
 
   return (
     <motion.section
@@ -186,12 +186,19 @@ function BeforeAndAfter() {
         </motion.div>
 
         <div className="text-center mb-8">
-          <motion.h2 className="text-4xl font-bold text-[#2c4755] mb-3" variants={titleVariants}>
+          <motion.h2
+            className="text-4xl font-bold text-[#2c4755] mb-3"
+            variants={titleVariants}
+          >
             BEFORE AND AFTER
           </motion.h2>
-          <motion.p className="text-[#c9a96e] max-w-3xl mx-auto" variants={subtitleVariants}>
-            Before and After: Transform Your Appearance with the Best Dermatology in New Cairo Dr Rehab Zakaria. Best
-            Filler and Botox in New Cairo.
+          <motion.p
+            className="text-[#c9a96e] max-w-3xl mx-auto"
+            variants={subtitleVariants}
+          >
+            Before and After: Transform Your Appearance with the Best
+            Dermatology in New Cairo Dr Rehab Zakaria. Best Filler and Botox in
+            New Cairo.
           </motion.p>
         </div>
 
@@ -201,8 +208,8 @@ function BeforeAndAfter() {
               key={item.id}
               className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow duration-300"
               onClick={() => {
-                setSelectedImage(item.image)
-                setSelectedTitle(item.title)
+                setSelectedImage(item.image);
+                setSelectedTitle(item.title);
               }}
               custom={index}
               variants={cardVariants}
@@ -218,7 +225,10 @@ function BeforeAndAfter() {
                 <h3 className="text-[#c9a96e] font-medium">{item.title}</h3>
               </motion.div>
 
-              <motion.div className="relative h-[300px] w-full overflow-hidden" variants={imageVariants}>
+              <motion.div
+                className="relative h-[300px] w-full overflow-hidden"
+                variants={imageVariants}
+              >
                 <Image
                   src={item.image || "/placeholder.svg"}
                   alt={`Before and after ${item.title}`}
@@ -247,9 +257,15 @@ function BeforeAndAfter() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
               >
-                <motion.div className="h-[1px] bg-[#c9a96e]" variants={lineVariants}></motion.div>
+                <motion.div
+                  className="h-[1px] bg-[#c9a96e]"
+                  variants={lineVariants}
+                ></motion.div>
                 <p className="text-[#c9a96e] text-xs mx-2">DR. REHAB ZAKARIA</p>
-                <motion.div className="h-[1px] bg-[#c9a96e]" variants={lineVariants}></motion.div>
+                <motion.div
+                  className="h-[1px] bg-[#c9a96e]"
+                  variants={lineVariants}
+                ></motion.div>
               </motion.div>
             </motion.div>
           ))}
@@ -258,7 +274,10 @@ function BeforeAndAfter() {
 
       <AnimatePresence>
         {selectedImage && (
-          <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
+          <Dialog
+            open={!!selectedImage}
+            onOpenChange={(open) => !open && setSelectedImage(null)}
+          >
             <DialogContent className="max-w-3xl">
               <motion.div
                 className="relative h-[500px] w-full"
@@ -289,8 +308,7 @@ function BeforeAndAfter() {
         )}
       </AnimatePresence>
     </motion.section>
-  )
+  );
 }
 
-export default BeforeAndAfter
-
+export default BeforeAndAfter;

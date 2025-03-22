@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/Components/ui/dialog"
 import { CardContent } from "@/Components/ui/card"
 import firstCertificate from "../../public/certificateOne.webp"

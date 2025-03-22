@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion } from "motion/react";
 import { Sparkles, Droplets, Syringe } from 'lucide-react'
 
 function Services() {

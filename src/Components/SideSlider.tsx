@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react";
 
 interface Testimonial {
   id: number
