@@ -1,16 +1,14 @@
-import Hero from "@/Components/Hero";
-import ImageSlider from "@/Components/ImageSlider";
-import Services from "@/Components/Services";
-import SideSlider from "@/Components/SideSlider";
-
+import Hero from "@/components/Hero";
+import Services from "@/components/Services";
+import SideSlider from "@/components/ReviewSlider";
+import ReviewSlider from "@/components/ReviewSlider";
 
 export default function Home() {
   return (
     <>
-    <Hero/>
-    <Services/>
-    <ImageSlider/>
-    <SideSlider/>
+      <Hero />
+      <Services />
+      <ReviewSlider />
     </>
-  )
+  );
 }

@@ -1,24 +1,25 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect, useRef } from "react"
-import Image from "next/image"
-import { Star, ChevronLeft, ChevronRight } from "lucide-react"
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { motion, AnimatePresence } from "motion/react";
+import { theme } from "@/lib/theme";
 
 interface Testimonial {
-  id: number
-  name: string
-  date: string
-  avatar: string
-  rating: number
-  text: string
-  verified?: boolean
+  id: number;
+  name: string;
+  date: string;
+  avatar: string;
+  rating: number;
+  text: string;
+  verified?: boolean;
 }
 
-export default function TestimonialSlider() {
+export default function ReviewsSlider() {
   const testimonials: Testimonial[] = [
     {
       id: 1,
@@ -65,68 +66,68 @@ export default function TestimonialSlider() {
       text: "Professional clinic with state-of-the-art equipment. The staff is friendly and the results are amazing!",
       verified: true,
     },
-  ]
+  ];
 
-  const isDesktop = useMediaQuery("(min-width: 1024px)")
-  const isTablet = useMediaQuery("(min-width: 640px)")
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isTablet = useMediaQuery("(min-width: 640px)");
 
-  const getVisibleCount = () => {
-    if (isDesktop) return 3
-    if (isTablet) return 2
-    return 1
-  }
+  const getVisibleCount = useCallback(() => {
+    if (isDesktop) return 3;
+    if (isTablet) return 2;
+    return 1;
+  }, [isDesktop, isTablet]);
 
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [visibleCount, setVisibleCount] = useState(getVisibleCount())
-  const [direction, setDirection] = useState(0) // -1 for left, 1 for right
-  const maxIndex = testimonials.length - visibleCount
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(getVisibleCount());
+  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const maxIndex = testimonials.length - visibleCount;
 
   useEffect(() => {
-    setVisibleCount(getVisibleCount())
-  }, [isDesktop, isTablet])
+    setVisibleCount(getVisibleCount());
+  }, [isDesktop, isTablet, getVisibleCount]);
 
   const nextSlide = () => {
-    setDirection(1)
-    setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1))
-  }
+    setDirection(1);
+    setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1));
+  };
 
   const prevSlide = () => {
-    setDirection(-1)
-    setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1))
-  }
+    setDirection(-1);
+    setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1));
+  };
 
-  // Auto-scroll functionality
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide()
-    }, 5000)
-
-    return () => clearInterval(interval)
-  }, [currentIndex, maxIndex])
+  // Auto-scroll functionality disabled as per requirement
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     nextSlide();
+  //   }, 5000);
+  //
+  //   return () => clearInterval(interval);
+  // }, [currentIndex, maxIndex]);
 
   // Swipe functionality for mobile
-  const touchStartX = useRef(0)
-  const touchEndX = useRef(0)
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX
-  }
+    touchStartX.current = e.touches[0].clientX;
+  };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX
-  }
+    touchEndX.current = e.touches[0].clientX;
+  };
 
   const handleTouchEnd = () => {
     if (touchStartX.current - touchEndX.current > 50) {
       // Swipe left
-      nextSlide()
+      nextSlide();
     }
 
     if (touchEndX.current - touchStartX.current > 50) {
       // Swipe right
-      prevSlide()
+      prevSlide();
     }
-  }
+  };
 
   // Animation variants
   const sectionVariants = {
@@ -139,7 +140,7 @@ export default function TestimonialSlider() {
         duration: 0.6,
       },
     },
-  }
+  };
 
   const headingVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -151,7 +152,7 @@ export default function TestimonialSlider() {
         ease: "easeOut",
       },
     },
-  }
+  };
 
   const ratingVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -164,7 +165,7 @@ export default function TestimonialSlider() {
         delay: 0.2,
       },
     },
-  }
+  };
 
   const starVariants = {
     hidden: { opacity: 0, scale: 0 },
@@ -178,13 +179,13 @@ export default function TestimonialSlider() {
         stiffness: 200,
       },
     }),
-  }
+  };
 
   const cardVariants = {
     hidden: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
+      x: direction > 0 ? 100 : -100,
       opacity: 0,
-      scale: 0.8,
+      scale: 0.95,
     }),
     visible: {
       x: 0,
@@ -194,15 +195,15 @@ export default function TestimonialSlider() {
         type: "spring",
         stiffness: 100,
         damping: 15,
-        duration: 0.5,
+        duration: 0.3,
       },
     },
     exit: (direction: number) => ({
-      x: direction > 0 ? -300 : 300,
+      x: direction > 0 ? -100 : 100,
       opacity: 0,
-      scale: 0.8,
+      scale: 0.95,
       transition: {
-        duration: 0.3,
+        duration: 0.2,
       },
     }),
     hover: {
@@ -212,7 +213,7 @@ export default function TestimonialSlider() {
         duration: 0.3,
       },
     },
-  }
+  };
 
   const buttonVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -234,7 +235,7 @@ export default function TestimonialSlider() {
       },
     },
     tap: { scale: 0.95 },
-  }
+  };
 
   const arrowVariants = {
     hover: {
@@ -245,11 +246,12 @@ export default function TestimonialSlider() {
       },
     },
     tap: { scale: 0.9 },
-  }
+  };
 
   return (
     <motion.section
-      className="py-8 md:py-12 lg:py-16 bg-white"
+      className="py-8 md:py-12 lg:py-16"
+      style={{ backgroundColor: theme.colors.background }}
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
@@ -257,12 +259,19 @@ export default function TestimonialSlider() {
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-12">
-          <motion.h2 className="text-2xl md:text-3xl font-bold text-[#2c4755] mb-6 md:mb-8" variants={headingVariants}>
+          <motion.h2
+            className="text-2xl md:text-3xl font-bold mb-6 md:mb-8"
+            style={{ color: theme.colors.dark }}
+            variants={headingVariants}
+          >
             Here is what our customers say
           </motion.h2>
 
           {/* Google Review Rating */}
-          <motion.div className="flex flex-col items-center justify-center mb-6 md:mb-10" variants={ratingVariants}>
+          <motion.div
+            className="flex flex-col items-center justify-center mb-6 md:mb-10"
+            variants={ratingVariants}
+          >
             <motion.h3
               className="text-lg md:text-xl font-bold mb-2"
               initial={{ opacity: 0, y: -10 }}
@@ -277,9 +286,19 @@ export default function TestimonialSlider() {
                   key={i}
                   custom={i}
                   variants={starVariants}
-                  whileHover={{ scale: 1.2, rotate: [0, -5, 5, 0], transition: { duration: 0.3 } }}
+                  whileHover={{
+                    scale: 1.2,
+                    rotate: [0, -5, 5, 0],
+                    transition: { duration: 0.3 },
+                  }}
                 >
-                  <Star className="w-5 h-5 md:w-6 md:h-6 fill-yellow-400 text-yellow-400" />
+                  <Star
+                    className="w-5 h-5 md:w-6 md:h-6"
+                    style={{
+                      fill: theme.colors.primary,
+                      color: theme.colors.primary,
+                    }}
+                  />
                 </motion.div>
               ))}
             </div>
@@ -348,107 +367,118 @@ export default function TestimonialSlider() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1 }}
             >
-              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-[#2c4755]" />
+              <ChevronLeft
+                className="h-5 w-5 md:h-6 md:w-6"
+                style={{ color: theme.colors.dark }}
+              />
             </motion.button>
 
             <div className="flex justify-center gap-3 md:gap-6 overflow-hidden">
               <AnimatePresence initial={false} custom={direction} mode="wait">
-                {testimonials.slice(currentIndex, currentIndex + visibleCount).map((testimonial) => (
-                  <motion.div
-                    key={testimonial.id}
-                    className="bg-gray-50 rounded-lg p-3 md:p-6 shadow-sm w-full flex flex-col min-h-[250px]"
-                    custom={direction}
-                    variants={cardVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    whileHover="hover"
-                    layout
-                  >
-                    <div className="flex items-center justify-between mb-3 md:mb-4">
-                      {testimonial.avatar ? (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.2, type: "spring" }}
-                        >
-                          <Image
-                            src={testimonial.avatar || "/placeholder.svg"}
-                            alt={testimonial.name}
-                            width={40}
-                            height={40}
-                            className="rounded-full mr-2 md:mr-3 w-8 h-8 md:w-10 md:h-10"
-                          />
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-purple-600 flex items-center justify-center text-white mr-2 md:mr-3 text-xs md:text-sm"
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.2, type: "spring" }}
-                        >
-                          {testimonial.name.charAt(0)}
-                        </motion.div>
-                      )}
-                      <motion.div
-                        className="flex flex-col"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        <p className="font-medium text-xs md:text-sm">{testimonial.name}</p>
-                        <p className="text-[10px] md:text-xs text-gray-500">{testimonial.date}</p>
-                      </motion.div>
-                    </div>
-
+                {testimonials
+                  .slice(currentIndex, currentIndex + visibleCount)
+                  .map((testimonial) => (
                     <motion.div
-                      className="flex mb-2 md:mb-3 justify-center"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.4 }}
+                      key={testimonial.id}
+                      className="rounded-lg p-3 md:p-6 shadow-sm w-full flex flex-col min-h-[250px]"
+                      style={{ backgroundColor: theme.colors.backgroundAlt }}
+                      custom={direction}
+                      variants={cardVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      whileHover="hover"
+                      layout
                     >
-                      {[...Array(testimonial.rating)].map((_, i) => (
+                      <div className="flex items-center mb-3 md:mb-4">
+                        {testimonial.avatar ? (
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.2, type: "spring" }}
+                          >
+                            <Image
+                              src={testimonial.avatar || "/placeholder.svg"}
+                              alt={testimonial.name}
+                              width={40}
+                              height={40}
+                              className="rounded-full mr-2 md:mr-3 w-8 h-8 md:w-10 md:h-10"
+                            />
+                          </motion.div>
+                        ) : (
+                          <motion.div
+                            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-purple-600 flex items-center justify-center text-white mr-2 md:mr-3 text-xs md:text-sm"
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.2, type: "spring" }}
+                          >
+                            {testimonial.name.charAt(0)}
+                          </motion.div>
+                        )}
                         <motion.div
-                          key={i}
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.4 + i * 0.1 }}
+                          className="flex flex-col"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3 }}
                         >
-                          <Star className="w-3 h-3 md:w-4 md:h-4 fill-yellow-400 text-yellow-400" />
+                          <p className="font-medium text-xs md:text-sm">
+                            {testimonial.name}
+                          </p>
+                          <p
+                            className="text-[10px] md:text-xs"
+                            style={{ color: theme.colors.darkMuted }}
+                          >
+                            {testimonial.date}
+                          </p>
                         </motion.div>
-                      ))}
-                      {testimonial.verified && (
-                        <motion.span
-                          className="ml-1 md:ml-2 text-white flex items-center justify-center text-[8px] md:text-xs bg-blue-500 w-4 h-4 md:w-5 md:h-5 rounded-full"
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.9, type: "spring" }}
-                        >
-                          ✓
-                        </motion.span>
-                      )}
+                      </div>
+
+                      <motion.div
+                        className="flex mb-2 md:mb-3 justify-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                      >
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.4 + i * 0.1 }}
+                          >
+                            <Star
+                              className="w-3 h-3 md:w-4 md:h-4"
+                              style={{
+                                fill: theme.colors.primary,
+                                color: theme.colors.primary,
+                              }}
+                            />
+                          </motion.div>
+                        ))}
+                        {testimonial.verified && (
+                          <motion.span
+                            className="ml-1 md:ml-2 text-white flex items-center justify-center text-[8px] md:text-xs w-4 h-4 md:w-5 md:h-5 rounded-full"
+                            style={{ backgroundColor: theme.colors.secondary }}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.9, type: "spring" }}
+                          >
+                            ✓
+                          </motion.span>
+                        )}
+                      </motion.div>
+
+                      <motion.p
+                        className="text-xs md:text-sm flex-grow mb-2 md:mb-3 line-clamp-4 overflow-ellipsis"
+                        style={{ color: theme.colors.darkMuted }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                      >
+                        {testimonial.text}
+                      </motion.p>
                     </motion.div>
-
-                    <motion.p
-                      className="text-xs md:text-sm flex-grow mb-2 md:mb-3 line-clamp-4 md:line-clamp-none"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
-                    >
-                      {testimonial.text}
-                    </motion.p>
-
-                    <motion.button
-                      className="text-xs md:text-sm text-gray-500 self-start hover:text-[#2c4755]"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.6 }}
-                      whileHover={{ scale: 1.05, x: 3 }}
-                    >
-                      Read more
-                    </motion.button>
-                  </motion.div>
-                ))}
+                  ))}
               </AnimatePresence>
             </div>
 
@@ -463,21 +493,16 @@ export default function TestimonialSlider() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1 }}
             >
-              <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-[#2c4755]" />
+              <ChevronRight
+                className="h-5 w-5 md:h-6 md:w-6"
+                style={{ color: theme.colors.dark }}
+              />
             </motion.button>
           </div>
 
-          <motion.button
-            className="bg-[#2c4755] hover:bg-[#1d3644] mt-6 md:mt-8 text-white rounded-full px-4 py-2 md:px-6 md:py-4 text-sm md:text-[17px] font-medium cursor-pointer"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            More Details
-          </motion.button>
+          {/* 'More Details' button removed as per requirement */}
         </div>
       </div>
     </motion.section>
-  )
+  );
 }
-

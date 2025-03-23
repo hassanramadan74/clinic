@@ -1,20 +1,20 @@
-import Hero from '@/Components/Hero'
-import SideSlider from '@/Components/SideSlider'
-import Counter from '@/Components/Counter'
-import React from 'react'
-import ImageSlider from '@/Components/ImageSlider'
-import Certificates from '@/Components/certificates'
+import Hero from "@/components/Hero";
+import SideSlider from "@/components/ReviewSlider";
+import Counter from "@/components/Counter";
+import React from "react";
+import Certificates from "@/components/certificates";
+import StatsCounter from "@/components/Counter";
+import ReviewSlider from "@/components/ReviewSlider";
 
 function About() {
   return (
-   <>
-   <Hero/>
-   <Counter/>
-   <Certificates/>
-   <ImageSlider/>
-   <SideSlider/>
-   </>
-  )
+    <>
+      <Hero />
+      <StatsCounter />
+      <Certificates />
+      <ReviewSlider />
+    </>
+  );
 }
 
-export default About
+export default About;
