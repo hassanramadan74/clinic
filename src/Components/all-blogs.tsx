@@ -1,3 +1,5 @@
+// if used ai on that file please dont forget to handle to show message when there is no blogs exist
+
 "use client";
 
 import Image from "next/image";
@@ -19,37 +21,35 @@ export default function AllBlogs() {
   const blogPosts: BlogPost[] = [
     {
       id: 1,
-      title: "Lip Filler Aftercare: Things to Avoid After Lip Injections",
+      title: "Modern Rhinoplasty: Achieving Natural-Looking Results",
       excerpt:
-        "Why lip filler aftercare is important? Want lips that make a statement? Full, plump lips have become a hot trend, and it's easy to see why. But getting lip fillers is just the first step. To make sure your results look amazing and last, there's a few things you need to do after the procedure. In this article, we'll give you some tips on how to take care of your lips so they heal quickly and look their best.",
-      image: "/images/BeforAfter1.jpg",
-      slug: "lip-filler-aftercare",
+        "Discover the latest advancements in rhinoplasty procedures that focus on creating harmonious, natural-looking results. Learn about the innovative techniques our surgeons use to enhance facial symmetry while maintaining your unique features. From computer-aided planning to advanced surgical methods, we'll explore how modern rhinoplasty can help you achieve the refined profile you desire.",
+      image: "/images/temp/blog1.jpeg",
+      slug: "modern-rhinoplasty-natural-results",
     },
     {
       id: 2,
-      title: "Lip Filler FAQS: Finding the Best Options for you",
+      title: "The Art of Facial Contouring: Combining Different Techniques",
       excerpt:
-        "You might be asking after deciding you need lip filler injection, what is the types of lip injection and what is the best results looks like, also what will be best option for you? All these questions will be answered by Dr rehab Zakaria. What are the best type of lip fillers? Restylane and juvederm are very well know types of fillers, and deliver great results. they are among the most popular used for lip fillers. If you are searching",
-      image: "/images/BeforAfter1.jpg",
-      slug: "lip-filler-faqs",
+        "Explore the sophisticated approach to facial contouring that combines multiple techniques for optimal results. From strategic filler placement to advanced lifting procedures, learn how our experts create balanced, youthful contours. We'll discuss how personalized treatment plans can enhance your natural features while maintaining facial harmony.",
+      image: "/images/temp/blog2.jpeg",
+      slug: "art-of-facial-contouring",
     },
     {
       id: 3,
-      title:
-        "What Is Skin Booster: All You Need To Know With Dr. Rehab Zakaria",
+      title: "Revolutionary Anti-Aging Treatments: Beyond Traditional Methods",
       excerpt:
-        "Are you tired of dull, aging skin? Skin booster offer a non-invasive, effective solution to rejuvenate your complexion. This innovative treatment harnesses the power of hyaluronic acid to hydrate, revitalize, and restore your skin's youthful glow. What Are Skin Boosters? Skin booster (بوستر الجلد) is a type of injectable treatment that utilizes hyaluronic acid (HA) to enhance skin quality. HA is a naturally occurring substance found in the body that helps retain moisture and improve skin elasticity. How Does it",
-      image: "/images/BeforAfter1.jpg",
-      slug: "what-is-skin-booster",
+        "Step into the future of anti-aging treatments with our comprehensive guide to cutting-edge procedures. Discover how combining advanced technologies with traditional techniques can provide superior results. From energy-based treatments to innovative injectables, learn about the latest solutions for maintaining youthful, radiant skin.",
+      image: "/images/temp/blog3.jpeg",
+      slug: "revolutionary-anti-aging-treatments",
     },
     {
       id: 4,
-      title:
-        "What Is Skin Booster: All You Need To Know With Dr. Rehab Zakaria",
+      title: "Understanding Body Contouring: Your Complete Guide",
       excerpt:
-        "Are you tired of dull, aging skin? Skin booster offer a non-invasive, effective solution to rejuvenate your complexion. This innovative treatment harnesses the power of hyaluronic acid to hydrate, revitalize, and restore your skin's youthful glow. What Are Skin Boosters? Skin booster (بوستر الجلد) is a type of injectable treatment that utilizes hyaluronic acid (HA) to enhance skin quality. HA is a naturally occurring substance found in the body that helps retain moisture and improve skin elasticity. How Does it",
-      image: "/images/BeforAfter1.jpg",
-      slug: "what-is-skin-booster",
+        "Dive deep into the world of body contouring procedures and learn how modern techniques can help sculpt your ideal silhouette. From non-invasive treatments to surgical options, we'll explore the full spectrum of body enhancement procedures. Understand the science behind different methods and how to choose the right approach for your goals.",
+      image: "/images/temp/blog4.jpeg",
+      slug: "understanding-body-contouring-guide",
     },
   ];
 
@@ -165,7 +165,7 @@ export default function AllBlogs() {
             style={{ color: theme.colors.dark }}
             variants={headingVariants}
           >
-            BLOG
+            BLOGS
           </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

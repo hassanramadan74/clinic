@@ -1,7 +1,9 @@
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Providers } from "./providers";
+
 import "./globals.css";
 import type { Metadata } from "next";
-
-
 
 export const metadata: Metadata = {
   title: "Clinic",
@@ -16,8 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-montserrat">
-        <div className="overflow-x-hidden"> 
-          {children}
+        <div className="overflow-x-hidden">
+          <Providers>
+            <Navbar />
+            {children}
+            <Footer />
+          </Providers>
         </div>
       </body>
     </html>

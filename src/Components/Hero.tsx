@@ -3,20 +3,11 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { theme } from "@/lib/theme";
 import { ArrowRight } from "lucide-react";
+import { HeroProps } from "@/lib/types";
+import { useRouter } from "next/navigation";
 
-const details = {
-  name: "Dr. Rehab Zakaria",
-  title: "Clinic & Beauty Consultant",
-  image: "/images/BeforAfter1.jpg",
-  qualifications: [
-    "Consultant in Dermatology, Cosmetic, and Laser",
-    "Master's and Doctorate in Dermatology and Laser Diseases",
-    "Certified Trainer",
-    "Master Injector",
-  ],
-};
-
-function Hero() {
+function Hero({ details, showMoreDetails = true }: HeroProps) {
+  const router = useRouter();
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -179,18 +170,21 @@ function Hero() {
               ))}
             </motion.ul>
 
-            <motion.button
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-medium"
-              style={{ backgroundColor: theme.colors.primary }}
-              variants={buttonVariants}
-              whileHover={{
-                backgroundColor: theme.colors.primaryHover,
-                scale: 1.02,
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              More Details <ArrowRight size={16} />
-            </motion.button>
+            {showMoreDetails && (
+              <motion.button
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-medium"
+                style={{ backgroundColor: theme.colors.primary }}
+                variants={buttonVariants}
+                whileHover={{
+                  backgroundColor: theme.colors.primaryHover,
+                  scale: 1.02,
+                }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => router.push("/about")}
+              >
+                More Details <ArrowRight size={16} />
+              </motion.button>
+            )}
           </motion.div>
 
           <motion.div

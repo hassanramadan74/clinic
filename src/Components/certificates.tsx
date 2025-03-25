@@ -28,7 +28,7 @@ const certificates: Certificate[] = [
     id: 1,
     name: "Dermatology Specialist",
     institute: "American Academy of Dermatology",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/certificate1.jpg",
     date: "June 2018",
     description:
       "Certification in advanced dermatological procedures and treatments.",
@@ -37,7 +37,7 @@ const certificates: Certificate[] = [
     id: 2,
     name: "Cosmetic Laser Certification",
     institute: "European Society for Laser Dermatology",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/certificate2.jpg",
     date: "March 2019",
     description:
       "Specialized training in laser treatments for various skin conditions.",
@@ -46,7 +46,7 @@ const certificates: Certificate[] = [
     id: 3,
     name: "Advanced Injection Techniques",
     institute: "International Association of Physicians in Aesthetic Medicine",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/certificate3.jpg",
     date: "November 2020",
     description:
       "Master certification in facial fillers and botulinum toxin injections.",
@@ -55,7 +55,7 @@ const certificates: Certificate[] = [
     id: 4,
     name: "Medical Aesthetics Fellowship",
     institute: "Royal College of Physicians",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/certificate4.jpg",
     date: "January 2021",
     description:
       "Comprehensive training in medical aesthetics and non-surgical procedures.",
@@ -64,7 +64,7 @@ const certificates: Certificate[] = [
     id: 5,
     name: "Skin Cancer Detection & Treatment",
     institute: "International Dermatology Institute",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/certificate5.jpg",
     date: "August 2022",
     description:
       "Advanced certification in skin cancer screening and treatment protocols.",
@@ -73,7 +73,7 @@ const certificates: Certificate[] = [
     id: 6,
     name: "Regenerative Medicine in Dermatology",
     institute: "Global Academy of Aesthetic Medicine",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/certificate1.jpg",
     date: "February 2023",
     description:
       "Specialized training in PRP, stem cell therapies, and other regenerative approaches for skin rejuvenation.",

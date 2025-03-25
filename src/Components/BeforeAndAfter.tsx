@@ -18,7 +18,7 @@ const beforeAfterItems: BeforeAfterItem[] = [
   {
     id: 1,
     title: "Lip Filler Enhancement",
-    image: "/images/BeforAfter1.jpg",
+    image: "/images/beforeafter (1).jpg",
     description:
       "Natural-looking lip augmentation with premium dermal fillers for enhanced volume and definition.",
     procedureDetails: [
@@ -29,23 +29,93 @@ const beforeAfterItems: BeforeAfterItem[] = [
   {
     id: 2,
     title: "Cheek Filler Contouring",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/beforeafter (2).jpg",
     description:
       "Restore youthful volume and enhance facial contours with strategic cheek augmentation.",
   },
   {
     id: 3,
     title: "Jawline Lifting & Chin Augmentation",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/beforeafter (3).jpg",
     description:
       "Define your facial profile with non-surgical jawline enhancement and chin augmentation.",
   },
   {
     id: 4,
     title: "Under-Eye Rejuvenation",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/beforeafter (4).jpg",
     description:
       "Reduce hollows and dark circles with specialized under-eye filler treatment.",
+  },
+  {
+    id: 5,
+    title: "Facial Contouring",
+    image: "/images/beforeafter (5).jpg",
+    description:
+      "Advanced facial sculpting techniques to enhance your natural features and create harmonious proportions.",
+  },
+  {
+    id: 6,
+    title: "Skin Rejuvenation",
+    image: "/images/beforeafter (6).jpg",
+    description:
+      "Comprehensive skin treatments to improve texture, tone, and overall skin health.",
+  },
+  {
+    id: 7,
+    title: "Non-Surgical Rhinoplasty",
+    image: "/images/beforeafter (7).jpg",
+    description:
+      "Precise nose reshaping using advanced dermal fillers for improved facial harmony.",
+  },
+  {
+    id: 8,
+    title: "Anti-Aging Treatment",
+    image: "/images/beforeafter (8).jpg",
+    description:
+      "Comprehensive anti-aging solutions to restore youthful appearance and skin vitality.",
+  },
+  {
+    id: 9,
+    title: "Facial Volume Restoration",
+    image: "/images/beforeafter (9).jpg",
+    description:
+      "Strategic volume enhancement to restore youthful facial contours and balance.",
+  },
+  {
+    id: 10,
+    title: "Skin Tightening",
+    image: "/images/beforeafter (10).jpg",
+    description:
+      "Advanced treatments to improve skin firmness and reduce signs of aging.",
+  },
+  {
+    id: 11,
+    title: "Full Face Harmonization",
+    image: "/images/beforeafter (11).jpg",
+    description:
+      "Comprehensive facial enhancement for optimal balance and natural beauty.",
+  },
+  {
+    id: 12,
+    title: "Dermal Therapy",
+    image: "/images/beforeafter (12).jpg",
+    description:
+      "Specialized skin treatments for improved texture and overall skin health.",
+  },
+  {
+    id: 13,
+    title: "Advanced Facial Sculpting",
+    image: "/images/beforeafter (13).jpg",
+    description:
+      "Precise facial contouring techniques for enhanced definition and symmetry.",
+  },
+  {
+    id: 14,
+    title: "Aesthetic Enhancement",
+    image: "/images/beforeafter (14).jpg",
+    description:
+      "Customized aesthetic treatments to highlight your natural beauty and features.",
   },
 ];
 
