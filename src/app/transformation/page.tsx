@@ -1,14 +1,11 @@
-import React from 'react'
-import SideSlider from "@/Components/SideSlider"
-import BeforeAndAfter from "@/Components/BeforeAndAfter"
+import React from "react";
+import BeforeAfter from "@/components/BeforeAndAfter";
 function Transformation() {
-  
   return (
     <>
-    <BeforeAndAfter />
-    <SideSlider />
+      <BeforeAfter />
     </>
-  )
+  );
 }
 
-export default Transformation
+export default Transformation;
