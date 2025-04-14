@@ -1,17 +1,13 @@
-import ImageSlider from '@/Components/ImageSlider'
-import SideSlider from "@/Components/SideSlider"
-import SpecificService from '@/Components/SpecificService'
+import ServiceTabs from "@/components/Services";
 
-import React from 'react'
+import React from "react";
 
 function Services() {
   return (
     <>
-        <SpecificService/>
-        <ImageSlider/>
-        <SideSlider/>
+      <ServiceTabs />
     </>
-  )
+  );
 }
 
-export default Services
+export default Services;

@@ -1,20 +1,19 @@
-import Hero from '@/Components/Hero'
-import SideSlider from '@/Components/SideSlider'
-import Counter from '@/Components/Counter'
-import React from 'react'
-import ImageSlider from '@/Components/ImageSlider'
-import Certificates from '@/Components/certificates'
+import Hero from "@/components/Hero";
+import React from "react";
+import Certificates from "@/components/certificates";
+import StatsCounter from "@/components/Counter";
+import ReviewSlider from "@/components/ReviewSlider";
+import { longHero } from "@/lib/heroData";
+import SpecificService from "@/components/SmallServices";
 
 function About() {
   return (
-   <>
-   <Hero/>
-   <Counter/>
-   <Certificates/>
-   <ImageSlider/>
-   <SideSlider/>
-   </>
-  )
+    <>
+      <Hero details={longHero} showMoreDetails={false} />
+      <StatsCounter />
+      <Certificates />
+    </>
+  );
 }
 
-export default About
+export default About;

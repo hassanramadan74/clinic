@@ -1,80 +1,79 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/Components/ui/dialog"
-import { CardContent } from "@/Components/ui/card"
-import firstCertificate from "../../public/certificateOne.webp"
-import secondCertificate from "../../public/certificateTwo.jpeg"
-import thirdCertificate from "../../public/certificateThree.webp"
-import fourthCertificate from "../../public/certificateFour.webp"
-import fifthCertificate from "../../public/certificateFive.webp"
-import sixthCertificate from "../../public/certificateSix.png"
+import { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "motion/react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { CardContent } from "@/components/ui/card";
+import { Award, Calendar, ExternalLink } from "lucide-react";
+import { theme } from "@/lib/theme";
 
 interface Certificate {
-  id: number
-  name: string
-  institute: string
-  image: any
-  date?: string
-  description?: string
+  id: number;
+  name: string;
+  institute: string;
+  image: any;
+  date?: string;
+  description?: string;
 }
 
-export default function Certificates() {
-  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null)
+const certificates: Certificate[] = [
+  {
+    id: 1,
+    name: "Fellowship",
+    institute: "Harvard Medical School",
+    image: "/images/certificate1.jpg",
+    date: "Jan 2021",
+    description:
+      "As a fellow of Harvard University, Dr. El Kholy received advanced training in plastic surgery techniques and modern innovations in aesthetic medicine. This global exposure enriched his approach to patient care and precision.",
+  },
+  {
+    id: 2,
+    name: "Master’s Degree in Plastic Surgery",
+    institute: "Cairo University",
+    image: "/images/certificate2.jpg",
+    date: "Jul 2015",
+    description:
+      "This postgraduate degree provided Dr. El Kholy with foundational and advanced surgical skills in aesthetic and reconstructive procedures. It laid the groundwork for his journey toward becoming a consultant plastic surgeon.",
+  },
+  {
+    id: 3,
+    name: "Medical Syndicate License",
+    institute: "Egyptian Medical Syndicate",
+    image: "/images/certificate3.jpg",
+    date: "Mar 2009",
+    description:
+      "This official license confirms Dr. El Kholy’s professional registration as a certified plastic surgeon authorized to practice in Egypt. It reflects his compliance with the highest national medical standards.",
+  },
+  {
+    id: 4,
+    name: "PhD in Plastic Surgery",
+    institute: "Cairo University",
+    image: "/images/certificate4.jpg",
+    date: "May 2020",
+    description:
+      "Awarded by Kasr Al Ainy Medical School, Cairo University, this doctorate reflects Dr. El Kholy’s advanced expertise in plastic and reconstructive surgery. The program included intensive clinical training and surgical research, making him a trusted name in the field.",
+  },
+  {
+    id: 5,
+    name: "Bachelor’s Degree in Medicine",
+    institute: "Cairo University",
+    image: "/images/certificate5.jpg",
+    date: "Nov 2007",
+    description:
+      "Dr. El Kholy earned his MBBCh from Kasr Al Ainy Medical School, one of the most prestigious medical institutions in the region. This degree marked the beginning of his medical and surgical training.",
+  },
+];
 
-  const certificates: Certificate[] = [
-    {
-      id: 1,
-      name: "Dermatology Specialist",
-      institute: "American Academy of Dermatology",
-      image: firstCertificate,
-      date: "June 2018",
-      description: "Certification in advanced dermatological procedures and treatments.",
-    },
-    {
-      id: 2,
-      name: "Cosmetic Laser Certification",
-      institute: "European Society for Laser Dermatology",
-      image: secondCertificate,
-      date: "March 2019",
-      description: "Specialized training in laser treatments for various skin conditions.",
-    },
-    {
-      id: 3,
-      name: "Advanced Injection Techniques",
-      institute: "International Association of Physicians in Aesthetic Medicine",
-      image: thirdCertificate,
-      date: "November 2020",
-      description: "Master certification in facial fillers and botulinum toxin injections.",
-    },
-    {
-      id: 4,
-      name: "Medical Aesthetics Fellowship",
-      institute: "Royal College of Physicians",
-      image: fourthCertificate,
-      date: "January 2021",
-      description: "Comprehensive training in medical aesthetics and non-surgical procedures.",
-    },
-    {
-      id: 5,
-      name: "Skin Cancer Detection & Treatment",
-      institute: "International Dermatology Institute",
-      image: fifthCertificate,
-      date: "August 2022",
-      description: "Advanced certification in skin cancer screening and treatment protocols.",
-    },
-    {
-      id: 6,
-      name: "Regenerative Medicine in Dermatology",
-      institute: "Global Academy of Aesthetic Medicine",
-      image: sixthCertificate,
-      date: "February 2023",
-      description:
-        "Specialized training in PRP, stem cell therapies, and other regenerative approaches for skin rejuvenation.",
-    },
-  ]
+export default function Certificates() {
+  const [selectedCertificate, setSelectedCertificate] =
+    useState<Certificate | null>(null);
 
   // Animation variants
   const sectionVariants = {
@@ -87,7 +86,7 @@ export default function Certificates() {
         duration: 0.6,
       },
     },
-  }
+  };
 
   const headingVariants = {
     hidden: { opacity: 0, y: -30 },
@@ -100,7 +99,7 @@ export default function Certificates() {
         damping: 15,
       },
     },
-  }
+  };
 
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -114,7 +113,7 @@ export default function Certificates() {
         delay: 0.2,
       },
     },
-  }
+  };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -145,53 +144,12 @@ export default function Certificates() {
         duration: 0.1,
       },
     },
-  }
-
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        delay: 0.3,
-      },
-    },
-  }
-
-  const dialogImageVariants = {
-    hidden: { opacity: 0, scale: 0.5 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        delay: 0.2,
-      },
-    },
-  }
-
-  const dialogContentVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        delay: 0.4,
-      },
-    },
-  }
+  };
 
   return (
     <motion.section
-      className="py-16 bg-white"
+      className="py-16"
+      style={{ backgroundColor: theme.colors.background }}
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
@@ -199,11 +157,39 @@ export default function Certificates() {
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <motion.h2 className="text-3xl font-bold text-[#2c4755] mb-3" variants={headingVariants}>
+          <motion.div
+            className="inline-flex items-center gap-2 mb-3"
+            variants={headingVariants}
+          >
+            <span
+              className="h-[1px] w-6"
+              style={{ backgroundColor: theme.colors.primary }}
+            ></span>
+            <span
+              className="text-sm font-medium uppercase tracking-wider"
+              style={{ color: theme.colors.primary }}
+            >
+              Expertise
+            </span>
+            <span
+              className="h-[1px] w-6"
+              style={{ backgroundColor: theme.colors.primary }}
+            ></span>
+          </motion.div>
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold mb-3"
+            style={{ color: theme.colors.dark }}
+            variants={headingVariants}
+          >
             Professional Certifications
           </motion.h2>
-          <motion.p className="text-gray-600 max-w-2xl mx-auto" variants={textVariants}>
-            Recognized by leading international institutions for excellence in dermatology and aesthetic medicine.
+          <motion.p
+            className="max-w-2xl mx-auto"
+            style={{ color: theme.colors.darkMuted }}
+            variants={textVariants}
+          >
+            Recognized by leading international institutions for excellence in
+            dermatology and aesthetic medicine.
           </motion.p>
         </div>
 
@@ -218,52 +204,66 @@ export default function Certificates() {
               whileHover="hover"
               whileTap="tap"
               onClick={() => setSelectedCertificate(certificate)}
-              className="overflow-hidden cursor-pointer rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300"
+              className="overflow-hidden cursor-pointer rounded-xl border transition-all duration-300"
+              style={{
+                backgroundColor: theme.colors.background,
+                borderColor: theme.colors.border,
+              }}
             >
-              <motion.div className="relative h-48 w-full overflow-hidden" variants={imageVariants}>
+              <div className="relative h-48 w-full overflow-hidden">
+                <div
+                  className="absolute top-0 left-0 w-full h-full z-10"
+                  style={{
+                    background: `linear-gradient(135deg, ${theme.colors.primaryLight}40, ${theme.colors.secondaryLight}40)`,
+                  }}
+                ></div>
                 <Image
                   src={certificate.image || "/placeholder.svg"}
                   alt={certificate.name}
                   fill
-                  className="object-cover transition-transform duration-500 hover:scale-110"
+                  className="object-cover transition-transform duration-500 hover:scale-110 z-0"
                 />
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
+                <div
+                  className="absolute top-3 right-3 z-20 px-2 py-1 rounded-full text-xs font-medium"
+                  style={{
+                    backgroundColor: theme.colors.primary,
+                    color: "white",
+                  }}
                 >
-                  <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
-                    <p className="text-sm font-medium">Click to view details</p>
-                  </div>
-                </motion.div>
-              </motion.div>
-              <CardContent className="p-4">
-                <motion.h3
-                  className="font-bold text-lg text-[#2c4755] mb-1"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                >
-                  {certificate.name}
-                </motion.h3>
-                <motion.p
-                  className="text-gray-600 text-sm"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                >
-                  {certificate.institute}
-                </motion.p>
-                {certificate.date && (
-                  <motion.p
-                    className="text-gray-500 text-xs mt-2"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+                  {certificate.date}
+                </div>
+              </div>
+              <CardContent className="p-5">
+                <div className="flex items-start gap-3">
+                  <div
+                    className="p-2 rounded-full mt-1"
+                    style={{ backgroundColor: theme.colors.primaryLight }}
                   >
-                    {certificate.date}
-                  </motion.p>
-                )}
+                    <Award size={18} style={{ color: theme.colors.primary }} />
+                  </div>
+                  <div>
+                    <h3
+                      className="font-bold text-lg mb-1"
+                      style={{ color: theme.colors.dark }}
+                    >
+                      {certificate.name}
+                    </h3>
+                    <p
+                      className="text-sm"
+                      style={{ color: theme.colors.darkMuted }}
+                    >
+                      {certificate.institute}
+                    </p>
+                    <motion.button
+                      className="mt-3 inline-flex items-center text-sm font-medium"
+                      style={{ color: theme.colors.primary }}
+                      whileHover={{ x: 5 }}
+                    >
+                      View certificate{" "}
+                      <ExternalLink size={14} className="ml-1" />
+                    </motion.button>
+                  </div>
+                </div>
               </CardContent>
             </motion.div>
           ))}
@@ -272,51 +272,80 @@ export default function Certificates() {
 
       <AnimatePresence>
         {selectedCertificate && (
-          <Dialog open={selectedCertificate !== null} onOpenChange={(open) => !open && setSelectedCertificate(null)}>
-            <DialogContent className="sm:max-w-3xl">
-              <DialogHeader>
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <DialogTitle className="text-xl text-[#2c4755]">{selectedCertificate.name}</DialogTitle>
-                  <DialogDescription className="text-gray-600">
-                    {selectedCertificate.institute}
-                    {selectedCertificate.date && ` • ${selectedCertificate.date}`}
-                  </DialogDescription>
-                </motion.div>
-              </DialogHeader>
+          <Dialog
+            open={selectedCertificate !== null}
+            onOpenChange={(open) => !open && setSelectedCertificate(null)}
+          >
+            <DialogContent
+              className="sm:max-w-3xl p-0 overflow-hidden rounded-xl"
+              style={{ backgroundColor: theme.colors.background }}
+            >
+              <div className="grid md:grid-cols-2 gap-0">
+                <div className="relative h-[300px] md:h-auto">
+                  <Image
+                    src={selectedCertificate.image || "/placeholder.svg"}
+                    alt={selectedCertificate.name}
+                    fill
+                    className="object-cover"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(135deg, ${theme.colors.primaryLight}40, ${theme.colors.secondaryLight}40)`,
+                    }}
+                  ></div>
+                </div>
 
-              <motion.div
-                className="relative w-full h-[400px] my-4"
-                variants={dialogImageVariants}
-                initial="hidden"
-                animate="visible"
-              >
-                <Image
-                  src={selectedCertificate.image || "/placeholder.svg"}
-                  alt={selectedCertificate.name}
-                  fill
-                  className="object-contain rounded-lg"
-                />
-              </motion.div>
+                <div className="p-6">
+                  <DialogHeader>
+                    <div className="flex items-center gap-2 mb-1">
+                      <Calendar
+                        size={16}
+                        style={{ color: theme.colors.primary }}
+                      />
+                      <span
+                        className="text-sm font-medium"
+                        style={{ color: theme.colors.primary }}
+                      >
+                        {selectedCertificate.date}
+                      </span>
+                    </div>
+                    <DialogTitle
+                      className="text-xl font-bold"
+                      style={{ color: theme.colors.dark }}
+                    >
+                      {selectedCertificate.name}
+                    </DialogTitle>
+                    <DialogDescription
+                      style={{ color: theme.colors.darkMuted }}
+                    >
+                      {selectedCertificate.institute}
+                    </DialogDescription>
+                  </DialogHeader>
 
-              {selectedCertificate.description && (
-                <motion.p
-                  className="text-gray-700 mt-2"
-                  variants={dialogContentVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  {selectedCertificate.description}
-                </motion.p>
-              )}
+                  <div
+                    className="mt-4 p-4 rounded-lg"
+                    style={{ backgroundColor: theme.colors.backgroundAlt }}
+                  >
+                    <h4
+                      className="text-sm font-semibold mb-2"
+                      style={{ color: theme.colors.dark }}
+                    >
+                      About this certification
+                    </h4>
+                    <p
+                      className="text-sm"
+                      style={{ color: theme.colors.darkMuted }}
+                    >
+                      {selectedCertificate.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </DialogContent>
           </Dialog>
         )}
       </AnimatePresence>
     </motion.section>
-  )
+  );
 }
-

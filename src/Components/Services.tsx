@@ -1,238 +1,178 @@
-"use client"
+"use client";
 
-import React from 'react'
-import { motion } from 'framer-motion'
-import { Sparkles, Droplets, Syringe } from 'lucide-react'
+import { useState } from "react";
+import { motion } from "motion/react";
+import { theme } from "@/lib/theme";
+import { ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { services } from "@/lib/services";
 
-function Services() {
-  // Animation variants
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        when: "beforeChildren",
-        staggerChildren: 0.2,
-      }
-    }
-  }
+function ServiceTabs() {
+  const [activeService, setActiveService] = useState(services[0].id);
 
-  const headingVariants = {
-    hidden: { opacity: 0, y: -50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15
-      }
-    }
-  }
-
-  const subheadingVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        delay: 0.2
-      }
-    }
-  }
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        delay: 0.4 + (i * 0.2)
-      }
-    }),
-    hover: {
-      y: -10,
-      boxShadow: "0px 20px 25px rgba(0, 0, 0, 0.15)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 15
-      }
-    }
-  }
-
-  const iconVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: (i: number) => ({
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 15,
-        delay: 0.6 + (i * 0.2)
-      }
-    }),
-    hover: {
-      scale: 1.1,
-      rotate: [0, -5, 5, -5, 0],
-      transition: {
-        duration: 0.5
-      }
-    }
-  }
-
-  const buttonVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 15,
-        delay: 0.2
-      }
-    },
-    hover: {
-      scale: 1.05,
-      boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
-    },
-    tap: { scale: 0.95 }
-  }
-
-  const ctaButtonVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        delay: 1.2
-      }
-    },
-    hover: {
-      scale: 1.05,
-      boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.15)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
-    },
-    tap: { scale: 0.95 },
-    pulse: {
-      scale: [1, 1.05, 1],
-      boxShadow: [
-        "0px 0px 0px rgba(0, 0, 0, 0.1)",
-        "0px 8px 20px rgba(0, 0, 0, 0.15)",
-        "0px 0px 0px rgba(0, 0, 0, 0.1)"
-      ],
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        repeatDelay: 3
-      }
-    }
-  }
-
-  const services = [
-    {
-      title: "FILLER",
-      description: "Best Filler in New Cairo. Restore volume and contour to your face with our dermal fillers. Enhance your lips, cheeks, and overall facial structure.",
-     
-    },
-    {
-      title: "BOTOX",
-      description: "Best Botox in New Cairo. Smooth away wrinkles and fine lines with our Botox treatments. Enjoy a more youthful and refreshed appearance.",
-
-    },
-    {
-      title: "SKIN BOOSTERS",
-      description: "Achieve a radiant and hydrated complexion with our skin boosters. Revitalize your skin from within for a luminous glow.",
-
-    }
-  ]
+  const selectedService =
+    services.find((service) => service.id === activeService) || services[0];
 
   return (
-    <motion.section 
-      className='bg-[#f2f2f2]'
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+    <section
+      className="py-16"
+      style={{ backgroundColor: theme.colors.background }}
     >
-      <div className='container mx-auto p-4 pb-12'>
-        <div className='text-center'>
-          <motion.h2 
-            className='text-4xl md:text-6xl font-[1000] mb-2 font-montserrat text-[#2c4755]'
-            variants={headingVariants}
+      <div className="container mx-auto px-4">
+        <motion.div
+          className="text-center max-w-3xl mx-auto mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-2 mb-4"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
           >
-            SERVICES
-          </motion.h2>
-          <motion.h2 
-            className='font-[400] text-black text-xl font-montserrat'
-            variants={subheadingVariants}
-          >
-            Learn Services to focus on your beauty
-          </motion.h2>
-        </div>
-        
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-4 justify-center'>
-          {services.map((service, index) => (
-            <motion.div 
-              key={index}
-              className='bg-white rounded-3xl py-12 px-7 shadow-xl flex-col items-center flex justify-center font-montserrat text-center'
-              custom={index}
-              variants={cardVariants}
-              whileHover="hover"
+            <span
+              className="h-[1px] w-6"
+              style={{ backgroundColor: theme.colors.primary }}
+            ></span>
+            <span
+              className="text-sm font-medium uppercase tracking-wider"
+              style={{ color: theme.colors.primary }}
             >
-              
-              <h2 className='text-3xl font-[1000] mt-2 text-[#2c4755]'>{service.title}</h2>
-              <h3 className='font-[500] text-[#2c4755] text-lg md:text-[25px] mt-4 mb-7 px-3'>{service.description}</h3>
-              
-              <motion.button 
-                className="bg-[#2c4755] hover:bg-[#1d3644] text-white rounded-full px-6 py-4 text-[17px] font-medium font-montserrat cursor-pointer"
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-              >
-                More Details
-              </motion.button>
-            </motion.div>
-          ))}
-        </div>
-        
-        <div className='flex justify-center mt-14 items-center'>
-          <motion.button 
-            className="bg-[#2c4755] hover:bg-[#1d3644] text-white rounded-full px-12 py-4 text-[19px] font-medium font-montserrat cursor-pointer"
-            variants={ctaButtonVariants}
-            initial="hidden"
-            whileInView="visible"
-            whileHover="hover"
-            whileTap="tap"
-            animate="pulse"
-            viewport={{ once: true }}
+              Our Services
+            </span>
+            <span
+              className="h-[1px] w-6"
+              style={{ backgroundColor: theme.colors.primary }}
+            ></span>
+          </motion.div>
+
+          <h2
+            className="text-3xl md:text-4xl font-bold mb-4"
+            style={{ color: theme.colors.dark }}
           >
-            Explore More of our Services
-          </motion.button>
+            Professional Aesthetic Services
+          </h2>
+
+          <p className="text-lg" style={{ color: theme.colors.darkMuted }}>
+            Explore our range of premium treatments designed to enhance your
+            natural beauty
+          </p>
+        </motion.div>
+
+        {/* Service Tabs */}
+        <div className="mb-12 overflow-x-auto">
+          <div className="flex justify-center min-w-max">
+            <div
+              className="flex rounded-full p-1"
+              style={{ backgroundColor: theme.colors.backgroundAlt }}
+            >
+              {services.map((service) => (
+                <motion.button
+                  key={service.id}
+                  className={`relative px-6 py-3 rounded-full text-sm font-medium transition-colors whitespace-nowrap`}
+                  style={{
+                    color:
+                      activeService === service.id
+                        ? "white"
+                        : theme.colors.darkMuted,
+                    backgroundColor:
+                      activeService === service.id
+                        ? theme.colors.primary
+                        : "transparent",
+                  }}
+                  onClick={() => setActiveService(service.id)}
+                  whileHover={{
+                    backgroundColor:
+                      activeService === service.id
+                        ? theme.colors.primary
+                        : theme.colors.backgroundAlt,
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  {service.title}
+                </motion.button>
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* Service Content */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+          key={activeService}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div>
+            <h3
+              className="text-2xl font-bold mb-4"
+              style={{ color: theme.colors.dark }}
+            >
+              {selectedService.title}
+            </h3>
+
+            <p
+              className="text-lg mb-6"
+              style={{ color: theme.colors.darkMuted }}
+            >
+              {selectedService.description}
+            </p>
+
+            <ul className="space-y-3 mb-8">
+              {selectedService.features.map((feature, index) => (
+                <motion.li
+                  key={index}
+                  className="flex items-start gap-3"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * index, duration: 0.4 }}
+                >
+                  <div
+                    className="w-6 h-6 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0"
+                    style={{ backgroundColor: theme.colors.primaryLight }}
+                  >
+                    <ChevronRight
+                      size={14}
+                      style={{ color: theme.colors.primary }}
+                    />
+                  </div>
+                  <span style={{ color: theme.colors.darkMuted }}>
+                    {feature}
+                  </span>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+
+          <div
+            className="rounded-2xl overflow-hidden h-[400px] relative"
+            style={{
+              backgroundColor: theme.colors.backgroundAlt,
+              boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <div className="absolute inset-0">
+              <Image
+                src={selectedService.image}
+                alt={selectedService.title}
+                fill
+                className="object-cover"
+                priority
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(135deg, ${theme.colors.primaryLight}30, ${theme.colors.secondaryLight}30)`,
+                }}
+              ></div>
+            </div>
+          </div>
+        </motion.div>
       </div>
-    </motion.section>
-  )
+    </section>
+  );
 }
 
-export default Services
+export default ServiceTabs;
