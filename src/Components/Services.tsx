@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { theme } from "@/lib/theme";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { services } from "@/lib/Services";
+import { services } from "@/lib/services";
 
 function ServiceTabs() {
   const [activeService, setActiveService] = useState(services[0].id);
@@ -144,18 +144,6 @@ function ServiceTabs() {
                 </motion.li>
               ))}
             </ul>
-
-            <motion.button
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-medium"
-              style={{ backgroundColor: theme.colors.primary }}
-              whileHover={{
-                backgroundColor: theme.colors.primaryHover,
-                scale: 1.02,
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Learn More About {selectedService.title}
-            </motion.button>
           </div>
 
           <div

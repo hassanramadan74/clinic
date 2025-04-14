@@ -26,57 +26,48 @@ interface Certificate {
 const certificates: Certificate[] = [
   {
     id: 1,
-    name: "Dermatology Specialist",
-    institute: "American Academy of Dermatology",
+    name: "Fellowship",
+    institute: "Harvard Medical School",
     image: "/images/certificate1.jpg",
-    date: "June 2018",
+    date: "Jan 2021",
     description:
-      "Certification in advanced dermatological procedures and treatments.",
+      "As a fellow of Harvard University, Dr. El Kholy received advanced training in plastic surgery techniques and modern innovations in aesthetic medicine. This global exposure enriched his approach to patient care and precision.",
   },
   {
     id: 2,
-    name: "Cosmetic Laser Certification",
-    institute: "European Society for Laser Dermatology",
+    name: "Master’s Degree in Plastic Surgery",
+    institute: "Cairo University",
     image: "/images/certificate2.jpg",
-    date: "March 2019",
+    date: "Jul 2015",
     description:
-      "Specialized training in laser treatments for various skin conditions.",
+      "This postgraduate degree provided Dr. El Kholy with foundational and advanced surgical skills in aesthetic and reconstructive procedures. It laid the groundwork for his journey toward becoming a consultant plastic surgeon.",
   },
   {
     id: 3,
-    name: "Advanced Injection Techniques",
-    institute: "International Association of Physicians in Aesthetic Medicine",
+    name: "Medical Syndicate License",
+    institute: "Egyptian Medical Syndicate",
     image: "/images/certificate3.jpg",
-    date: "November 2020",
+    date: "Mar 2009",
     description:
-      "Master certification in facial fillers and botulinum toxin injections.",
+      "This official license confirms Dr. El Kholy’s professional registration as a certified plastic surgeon authorized to practice in Egypt. It reflects his compliance with the highest national medical standards.",
   },
   {
     id: 4,
-    name: "Medical Aesthetics Fellowship",
-    institute: "Royal College of Physicians",
+    name: "PhD in Plastic Surgery",
+    institute: "Cairo University",
     image: "/images/certificate4.jpg",
-    date: "January 2021",
+    date: "May 2020",
     description:
-      "Comprehensive training in medical aesthetics and non-surgical procedures.",
+      "Awarded by Kasr Al Ainy Medical School, Cairo University, this doctorate reflects Dr. El Kholy’s advanced expertise in plastic and reconstructive surgery. The program included intensive clinical training and surgical research, making him a trusted name in the field.",
   },
   {
     id: 5,
-    name: "Skin Cancer Detection & Treatment",
-    institute: "International Dermatology Institute",
+    name: "Bachelor’s Degree in Medicine",
+    institute: "Cairo University",
     image: "/images/certificate5.jpg",
-    date: "August 2022",
+    date: "Nov 2007",
     description:
-      "Advanced certification in skin cancer screening and treatment protocols.",
-  },
-  {
-    id: 6,
-    name: "Regenerative Medicine in Dermatology",
-    institute: "Global Academy of Aesthetic Medicine",
-    image: "/images/certificate1.jpg",
-    date: "February 2023",
-    description:
-      "Specialized training in PRP, stem cell therapies, and other regenerative approaches for skin rejuvenation.",
+      "Dr. El Kholy earned his MBBCh from Kasr Al Ainy Medical School, one of the most prestigious medical institutions in the region. This degree marked the beginning of his medical and surgical training.",
   },
 ];
 

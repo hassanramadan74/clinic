@@ -5,7 +5,8 @@ type SocialMediaLinks = {
 
 // Create a map of social media links
 export const socialMediaLinks: SocialMediaLinks = {
-  instagram: "https://www.instagram.com/",
-  facebook: "https://www.facebook.com/",
+  instagram:
+    "https://www.instagram.com/dr.mohamedelkholy_?igsh=M3M3eG85cWNkbGlk",
+  facebook: "https://www.facebook.com/share/19BtB72C7A/?mibextid=wwXIfr",
   tiktok: "https://www.tiktok.com/",
 };

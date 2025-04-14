@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -26,6 +27,7 @@ import { useToast } from "@/hooks/use-toast";
 import { PhoneNumberInput, getFullPhoneNumber } from "./PhoneNumberInput";
 import { DatePicker } from "@/components/ui/date-picker";
 import { useState } from "react";
+import axiosInstance from "@/lib/axios";
 
 type FormData = z.infer<typeof reservationFormSchema>;
 
@@ -54,11 +56,16 @@ export default function ReservationForm() {
         name: data.fullName,
         phone: fullPhoneNumber,
         email: data.email,
-        date: data.date,
+        date: format(data.date, "yyyy-MM-dd"),
         time_slot: data.timeSlot,
         service: data.service,
       };
-      console.log(submissionData);
+
+      const response = await axiosInstance.post(
+        "/reservation/submit/",
+        submissionData
+      );
+      return response.data;
     },
     onSuccess: () => {
       toast({

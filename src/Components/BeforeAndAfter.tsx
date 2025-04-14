@@ -3,10 +3,11 @@ import React from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { ChevronRight, Maximize2 } from "lucide-react";
+import { ChevronRight, Maximize2, ImageIcon } from "lucide-react";
 import { theme } from "@/lib/theme";
+import NoContent from "./NoContent";
 
-interface BeforeAfterItem {
+export interface BeforeAfterItem {
   id: number;
   title: string;
   image: any;
@@ -14,115 +15,21 @@ interface BeforeAfterItem {
   procedureDetails?: string[];
 }
 
-const beforeAfterItems: BeforeAfterItem[] = [
-  {
-    id: 1,
-    title: "Lip Filler Enhancement",
-    image: "/images/beforeafter (1).jpg",
-    description:
-      "Natural-looking lip augmentation with premium dermal fillers for enhanced volume and definition.",
-    procedureDetails: [
-      "Dermal fillers are non-surgical treatments that are used to enhance the appearance of the dermal layer.",
-      "They are typically made from a variety of materials, including but not limited to: keratin, keratinoids, and collagen.",
-    ],
-  },
-  {
-    id: 2,
-    title: "Cheek Filler Contouring",
-    image: "/images/beforeafter (2).jpg",
-    description:
-      "Restore youthful volume and enhance facial contours with strategic cheek augmentation.",
-  },
-  {
-    id: 3,
-    title: "Jawline Lifting & Chin Augmentation",
-    image: "/images/beforeafter (3).jpg",
-    description:
-      "Define your facial profile with non-surgical jawline enhancement and chin augmentation.",
-  },
-  {
-    id: 4,
-    title: "Under-Eye Rejuvenation",
-    image: "/images/beforeafter (4).jpg",
-    description:
-      "Reduce hollows and dark circles with specialized under-eye filler treatment.",
-  },
-  {
-    id: 5,
-    title: "Facial Contouring",
-    image: "/images/beforeafter (5).jpg",
-    description:
-      "Advanced facial sculpting techniques to enhance your natural features and create harmonious proportions.",
-  },
-  {
-    id: 6,
-    title: "Skin Rejuvenation",
-    image: "/images/beforeafter (6).jpg",
-    description:
-      "Comprehensive skin treatments to improve texture, tone, and overall skin health.",
-  },
-  {
-    id: 7,
-    title: "Non-Surgical Rhinoplasty",
-    image: "/images/beforeafter (7).jpg",
-    description:
-      "Precise nose reshaping using advanced dermal fillers for improved facial harmony.",
-  },
-  {
-    id: 8,
-    title: "Anti-Aging Treatment",
-    image: "/images/beforeafter (8).jpg",
-    description:
-      "Comprehensive anti-aging solutions to restore youthful appearance and skin vitality.",
-  },
-  {
-    id: 9,
-    title: "Facial Volume Restoration",
-    image: "/images/beforeafter (9).jpg",
-    description:
-      "Strategic volume enhancement to restore youthful facial contours and balance.",
-  },
-  {
-    id: 10,
-    title: "Skin Tightening",
-    image: "/images/beforeafter (10).jpg",
-    description:
-      "Advanced treatments to improve skin firmness and reduce signs of aging.",
-  },
-  {
-    id: 11,
-    title: "Full Face Harmonization",
-    image: "/images/beforeafter (11).jpg",
-    description:
-      "Comprehensive facial enhancement for optimal balance and natural beauty.",
-  },
-  {
-    id: 12,
-    title: "Dermal Therapy",
-    image: "/images/beforeafter (12).jpg",
-    description:
-      "Specialized skin treatments for improved texture and overall skin health.",
-  },
-  {
-    id: 13,
-    title: "Advanced Facial Sculpting",
-    image: "/images/beforeafter (13).jpg",
-    description:
-      "Precise facial contouring techniques for enhanced definition and symmetry.",
-  },
-  {
-    id: 14,
-    title: "Aesthetic Enhancement",
-    image: "/images/beforeafter (14).jpg",
-    description:
-      "Customized aesthetic treatments to highlight your natural beauty and features.",
-  },
-];
-
-function BeforeAfter() {
+function BeforeAfter({ items }: { items: BeforeAfterItem[] }) {
   const [selectedImage, setSelectedImage] = React.useState<any | null>(null);
   const [selectedItem, setSelectedItem] =
     React.useState<BeforeAfterItem | null>(null);
+
+  // If there are no items, show the NoContent component
+  if (!items || items.length === 0) {
+    return (
+      <NoContent
+        title="No Transformations Available"
+        message="There are no before and after transformations added yet. Please check back later."
+        icon={<ImageIcon size={48} style={{ color: theme.colors.primary }} />}
+      />
+    );
+  }
 
   return (
     <section
@@ -177,9 +84,10 @@ function BeforeAfter() {
           </h2>
 
           <p className="text-lg" style={{ color: theme.colors.darkMuted }}>
-            Explore our gallery of remarkable transformations by Dr. Mohamed
-            Elkholy, showcasing the artistry and precision behind each aesthetic
-            procedure.
+            Witness the real transformations achieved by Dr. Mohamed El Kholy,
+            where precision, experience, and aesthetic vision come together.
+            Each image tells a story of renewed confidence and refined beauty —
+            tailored uniquely to every patient’s features.
           </p>
         </motion.div>
 
@@ -197,7 +105,7 @@ function BeforeAfter() {
             },
           }}
         >
-          {beforeAfterItems.map((item) => (
+          {items.map((item) => (
             <motion.div
               key={item.id}
               className="group relative rounded-2xl overflow-hidden"
@@ -329,13 +237,15 @@ function BeforeAfter() {
                       className="text-sm space-y-2"
                       style={{ color: theme.colors.darkMuted }}
                     >
-                      {selectedItem.procedureDetails?.map((detail, index) => (
-                        <li key={index}>• {detail}</li>
-                      ))}
+                      {selectedItem.procedureDetails?.flatMap((detail) =>
+                        detail
+                          .split("\r\n")
+                          .map((line, index) => <li key={index}>• {line}</li>)
+                      )}
                     </ul>
                   </div>
 
-                  <div className="mt-auto">
+                  {/* <div className="mt-auto">
                     <motion.button
                       className="w-full py-3 rounded-lg text-white font-medium"
                       style={{ backgroundColor: theme.colors.primary }}
@@ -346,7 +256,7 @@ function BeforeAfter() {
                     >
                       Book a Consultation
                     </motion.button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </DialogContent>

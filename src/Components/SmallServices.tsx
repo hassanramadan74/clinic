@@ -1,6 +1,6 @@
 "use client";
 
-import { services } from "@/lib/Services";
+import { services } from "@/lib/services";
 
 import { theme } from "@/lib/theme";
 

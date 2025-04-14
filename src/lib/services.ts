@@ -6,13 +6,13 @@ export const services: Service[] = [
     title: "Body Contouring",
     image: "/images/temp/blog1.jpeg",
     description:
-      "Advanced body sculpting procedures to enhance your natural contours and achieve your desired silhouette.",
+      "Sculpt and define your body with advanced body contouring techniques. Whether it's after weight loss or pregnancy, we help you achieve a smooth, toned silhouette that complements your figure.",
     features: [
-      "Customized Treatment Plans",
-      "Natural-Looking Results",
-      "Minimal Recovery Time",
-      "Long-Lasting Results",
-      "Expert Surgical Techniques",
+      "Fat Elimination & Sculpted Shape",
+      "Targeted Area Reduction",
+      "Improved Body Proportion",
+      "Post-Weight Loss or Postpartum Solution",
+      "Smooth, Defined Silhouette",
     ],
   },
   {
@@ -20,13 +20,13 @@ export const services: Service[] = [
     title: "Face & Neck Lift",
     image: "/images/temp/blog2.jpeg",
     description:
-      "Comprehensive facial rejuvenation to restore youthful contours and address signs of aging in the face and neck.",
+      "Reverse the signs of aging with comprehensive facial and neck rejuvenation. This procedure lifts sagging skin, smooths wrinkles, and restores youthful definition to your facial features.",
     features: [
+      "Lifts Sagging Skin",
+      "Reduces Wrinkles & Fine Lines",
+      "Defines Jawline & Neck",
+      "Long-Lasting Rejuvenation",
       "Natural-Looking Results",
-      "Improved Facial Contours",
-      "Reduced Signs of Aging",
-      "Long-Lasting Effects",
-      "Minimal Scarring",
     ],
   },
   {
@@ -34,13 +34,13 @@ export const services: Service[] = [
     title: "Double Chin Liposuction",
     image: "/images/temp/blog3.jpeg",
     description:
-      "Targeted fat removal to enhance jaw definition and improve facial profile.",
+      "Say goodbye to the double chin with precision fat removal that enhances your jawline and creates a sharper, more attractive profile — all with minimal downtime.",
     features: [
-      "Defined Jawline",
-      "Improved Profile",
-      "Minimal Downtime",
-      "Permanent Fat Removal",
-      "Natural Contours",
+      "Removes Fat Under the Chin",
+      "Sharpens Jawline",
+      "Quick Recovery Time",
+      "Minimally Invasive",
+      "Permanent Results",
     ],
   },
   {
@@ -48,13 +48,13 @@ export const services: Service[] = [
     title: "Rhinoplasty",
     image: "/images/temp/blog4.jpeg",
     description:
-      "Artistic nose reshaping to enhance facial harmony and improve breathing function.",
+      "Reshape and refine the nose to improve both aesthetics and breathing. Whether you're aiming for facial harmony or correcting a functional issue, rhinoplasty offers natural-looking results.",
     features: [
-      "Improved Facial Balance",
-      "Enhanced Breathing",
-      "Custom Design",
-      "Natural Results",
-      "Permanent Solution",
+      "Improved Facial Harmony",
+      "Enhanced Breathing Function",
+      "Customized Nose Reshaping",
+      "Balanced Facial Features",
+      "Permanent, Natural Look",
     ],
   },
   {
@@ -62,13 +62,13 @@ export const services: Service[] = [
     title: "Blepharoplasty",
     image: "/images/temp/blepharoplasty.svg",
     description:
-      "Eyelid surgery to rejuvenate your appearance and improve vision affected by drooping eyelids.",
+      "Refresh your eyes with eyelid surgery that removes excess skin and fat. Blepharoplasty helps open up the eyes, reduce puffiness, and improve vision affected by drooping eyelids.",
     features: [
-      "Youthful Eye Area",
-      "Improved Vision",
-      "Natural-Looking Results",
-      "Minimal Scarring",
-      "Long-Lasting Effects",
+      "Lifts Drooping Eyelids",
+      "Reduces Puffiness & Bags",
+      "Brighter, More Youthful Eyes",
+      "Enhances Field of Vision",
+      "Subtle, Refreshed Appearance",
     ],
   },
   {
@@ -76,13 +76,13 @@ export const services: Service[] = [
     title: "Brachioplasty",
     image: "/images/temp/brachioplasty.svg",
     description:
-      "Arm lift surgery to remove excess skin and fat, creating more toned and defined arms.",
+      "Tighten and reshape your upper arms by removing excess skin and fat. This procedure delivers slimmer, more toned arms — perfect for restoring confidence in sleeveless styles.",
     features: [
-      "Toned Appearance",
-      "Improved Confidence",
-      "Custom Contouring",
-      "Long-Term Results",
-      "Natural Look",
+      "Removes Excess Skin & Fat",
+      "Restores Arm Contour",
+      "Suitable After Weight Loss",
+      "Firmer, Toned Appearance",
+      "Enhances Upper Body Confidence",
     ],
   },
   {
@@ -90,13 +90,13 @@ export const services: Service[] = [
     title: "Thigh Lift",
     image: "/images/temp/thigh_lift.svg",
     description:
-      "Reshape the thighs by reducing excess skin and fat for smoother, more proportionate contours.",
+      "Dr. Mohamed El Kholy offers thigh lift surgery to reshape and tone the legs by removing excess skin and fat. The result is smoother, more defined thighs that enhance mobility, confidence, and body balance.",
     features: [
-      "Improved Shape",
-      "Better Proportion",
-      "Enhanced Comfort",
-      "Lasting Results",
-      "Natural Contours",
+      "Tightens Loose Inner & Outer Thigh Skin",
+      "Improves Leg Contour",
+      "Reduces Chafing & Discomfort",
+      "Smooth, Youthful Appearance",
+      "Ideal After Major Weight Loss",
     ],
   },
   {
@@ -104,13 +104,13 @@ export const services: Service[] = [
     title: "Breast Augmentation",
     image: "/images/temp/breast_augmentation.svg",
     description:
-      "Enhance breast size and shape using the latest implant technology and surgical techniques.",
+      "Dr. El Kholy delivers breast augmentation with artistic precision to achieve fuller, natural-looking results tailored to each patient's body type. Whether you're restoring volume or enhancing curves, you're in expert hands.",
     features: [
-      "Natural Feel",
-      "Customized Size",
-      "Proportional Results",
-      "Various Options",
-      "Long-Lasting Results",
+      "Enhances Size & Fullness",
+      "Restores Volume After Weight Loss or Pregnancy",
+      "Improves Symmetry",
+      "Options: Silicone Implants or Fat Transfer",
+      "Natural, Feminine Look",
     ],
   },
   {
@@ -118,13 +118,13 @@ export const services: Service[] = [
     title: "Breast Reduction",
     image: "/images/temp/breast_reduction.svg",
     description:
-      "Reduce breast size to alleviate discomfort and achieve better proportion with your body.",
+      "Breast reduction with Dr. El Kholy offers both physical relief and aesthetic improvement. The surgery removes excess tissue while reshaping the breasts for a lifted, proportionate look that boosts confidence and comfort.",
     features: [
-      "Improved Comfort",
-      "Better Proportion",
-      "Reduced Back Pain",
-      "Enhanced Activity",
-      "Natural Shape",
+      "Reduces Breast Size & Weight",
+      "Eases Back, Neck, & Shoulder Pain",
+      "Improves Posture & Comfort",
+      "Enhances Daily Mobility",
+      "Balanced, Proportional Appearance",
     ],
   },
   {
@@ -146,13 +146,13 @@ export const services: Service[] = [
     title: "Gynecomastia Surgery",
     image: "/images/temp/gynecomastia.svg",
     description:
-      "Male breast reduction surgery to create a firmer, flatter, and more masculine chest contour.",
+      "Dr. El Kholy specializes in gynecomastia correction, offering a permanent solution to enlarged male breasts. With advanced techniques, he restores a sculpted chest shape, helping men feel confident in their bodies again.",
     features: [
-      "Masculine Contour",
-      "Improved Confidence",
-      "Natural Results",
+      "Flattens & Firms the Chest",
+      "Removes Glandular Tissue & Fat",
+      "Boosts Confidence in Clothing & Appearance",
       "Minimal Scarring",
-      "Permanent Solution",
+      "Restores Masculine Contour",
     ],
   },
   {
@@ -160,13 +160,13 @@ export const services: Service[] = [
     title: "Abdominoplasty",
     image: "/images/temp/abdominoplasty.svg",
     description:
-      "Tummy tuck surgery to remove excess skin and fat, restoring a firmer, flatter abdominal profile.",
+      "Get the toned stomach you've been working for with abdominoplasty performed by Dr. El Kholy. This procedure sculpts and flattens the abdomen, restoring core strength and body balance — especially effective after major body changes.",
     features: [
-      "Flatter Stomach",
-      "Tighter Muscles",
-      "Improved Contour",
-      "Long-Lasting Results",
-      "Enhanced Confidence",
+      "Removes Excess Abdominal Skin & Fat",
+      "Tightens Weakened Muscles",
+      "Flatter, Firmer Abdomen",
+      "Ideal After Pregnancy or Weight Loss",
+      "Long-Term Contour Improvement",
     ],
   },
   {
@@ -174,13 +174,13 @@ export const services: Service[] = [
     title: "Brazilian Butt Lift",
     image: "/images/temp/brazilian_butt.svg",
     description:
-      "Natural buttock enhancement using your own fat to create fuller, more shapely contours.",
+      "With Dr. El Kholy's expert fat transfer techniques, the Brazilian Butt Lift achieves fuller, rounder curves by using your own fat. The result is a natural lift and proportionate contour — all in one treatment.",
     features: [
-      "Natural Results",
-      "Custom Shaping",
-      "Proportional Enhancement",
-      "Long-Term Results",
-      "Minimal Scarring",
+      "Enhances Butt Volume & Shape",
+      "Natural Look Using Your Own Fat",
+      "Lifts & Tightens the Area",
+      "No Implants Needed",
+      "Creates Hourglass Silhouette",
     ],
   },
   {
@@ -188,13 +188,13 @@ export const services: Service[] = [
     title: "Fat Injection",
     image: "/images/temp/fat_injection.svg",
     description:
-      "Natural body contouring using your own fat to enhance and reshape various areas of the body.",
+      "Fat transfer procedures by Dr. El Kholy offer a natural alternative to fillers or implants, using your own fat to enhance volume in targeted areas with soft, subtle, and long-lasting results.",
     features: [
-      "Natural Enhancement",
-      "Multiple Areas",
-      "Long-Lasting Results",
-      "Minimal Scarring",
-      "Custom Contouring",
+      "Natural Volume Restoration",
+      "Enhances Face, Breasts, or Buttocks",
+      "Uses Your Own Fat (No Implants)",
+      "Safe, Long-Lasting Results",
+      "Dual Benefit: Fat Removal & Reuse",
     ],
   },
   {
@@ -202,13 +202,13 @@ export const services: Service[] = [
     title: "High Definition Liposuction",
     image: "/images/temp/hd_lipo.svg",
     description:
-      "Advanced liposuction technique to reveal underlying muscle definition and create athletic contours.",
+      "HD Lipo is for those seeking a chiseled, athletic body contour. Dr. El Kholy uses specialized techniques to sculpt detailed muscle lines and remove stubborn fat — delivering a dramatic, toned physique.",
     features: [
-      "Athletic Look",
-      "Precise Sculpting",
-      "Enhanced Definition",
-      "Custom Results",
-      "Long-Term Effects",
+      "Defines Muscle Lines (Abs, Arms, Back)",
+      "Precision Fat Removal",
+      "Athletic, Sculpted Look",
+      "Ideal for Fit Individuals",
+      "Minimal Downtime",
     ],
   },
   {
@@ -216,13 +216,13 @@ export const services: Service[] = [
     title: "Mommy Makeover",
     image: "/images/temp/mommy_makeover.svg",
     description:
-      "Comprehensive surgical plan to restore your pre-pregnancy body shape and confidence.",
+      "Designed for moms ready to reclaim their bodies, the Mommy Makeover by Dr. El Kholy blends multiple procedures into one recovery. It's a full-body transformation with expert care and a personalized approach.",
     features: [
-      "Customized Plan",
-      "Multiple Procedures",
-      "Complete Transformation",
-      "Natural Results",
-      "Long-Lasting Effects",
+      "Combines Tummy Tuck, Breast Surgery & More",
+      "Restores Pre-Pregnancy Body",
+      "Customizable to Your Goals",
+      "Boosts Confidence & Comfort",
+      "Complete Transformation in One Plan",
     ],
   },
   {
@@ -230,13 +230,13 @@ export const services: Service[] = [
     title: "Post-Bariatric Procedures",
     image: "/images/temp/post_bariatric.svg",
     description:
-      "Body contouring procedures to remove excess skin after significant weight loss and complete your transformation.",
+      "After massive weight loss, Dr. El Kholy helps complete your journey with reconstructive body procedures that eliminate sagging skin and refine your new shape — making your results feel complete and comfortable.",
     features: [
-      "Complete Transformation",
-      "Improved Comfort",
-      "Custom Planning",
-      "Natural Results",
-      "Enhanced Mobility",
+      "Removes Excess Skin After Weight Loss",
+      "Reshapes Body Contours",
+      "Boosts Comfort & Confidence",
+      "Tailored to Each Patient's Journey",
+      "Improves Skin Health & Hygiene",
     ],
   },
 ];

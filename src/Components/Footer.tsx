@@ -65,9 +65,10 @@ const Footer = () => {
             About Us
           </h3>
           <p className="text-xs" style={{ color: theme.colors.light }}>
-            Dr. Mohamed Elkholy&apos;s clinic offers premium aesthetic and
-            dermatology services. Visit us today for professional care and
-            transformative results!
+            With years of experience in advanced cosmetic and reconstructive
+            surgery, Dr. El Kholy is dedicated to delivering natural results and
+            restoring confidence. From body contouring to facial rejuvenation,
+            each treatment is tailored with precision and care.
           </p>
         </div>
 

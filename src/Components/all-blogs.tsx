@@ -1,13 +1,14 @@
-// if used ai on that file please dont forget to handle to show message when there is no blogs exist
-
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpenIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { theme } from "@/lib/theme";
-interface BlogPost {
+import React from "react";
+import NoContent from "./NoContent";
+
+export interface BlogPost {
   id: number;
   title: string;
   excerpt: string;
@@ -15,45 +16,24 @@ interface BlogPost {
   slug: string;
 }
 
-export default function AllBlogs() {
-  // Note: In a real implementation, you would import the images properly
-  // For this example, we'll use placeholder images
-  const blogPosts: BlogPost[] = [
-    {
-      id: 1,
-      title: "Modern Rhinoplasty: Achieving Natural-Looking Results",
-      excerpt:
-        "Discover the latest advancements in rhinoplasty procedures that focus on creating harmonious, natural-looking results. Learn about the innovative techniques our surgeons use to enhance facial symmetry while maintaining your unique features. From computer-aided planning to advanced surgical methods, we'll explore how modern rhinoplasty can help you achieve the refined profile you desire.",
-      image: "/images/temp/blog1.jpeg",
-      slug: "modern-rhinoplasty-natural-results",
-    },
-    {
-      id: 2,
-      title: "The Art of Facial Contouring: Combining Different Techniques",
-      excerpt:
-        "Explore the sophisticated approach to facial contouring that combines multiple techniques for optimal results. From strategic filler placement to advanced lifting procedures, learn how our experts create balanced, youthful contours. We'll discuss how personalized treatment plans can enhance your natural features while maintaining facial harmony.",
-      image: "/images/temp/blog2.jpeg",
-      slug: "art-of-facial-contouring",
-    },
-    {
-      id: 3,
-      title: "Revolutionary Anti-Aging Treatments: Beyond Traditional Methods",
-      excerpt:
-        "Step into the future of anti-aging treatments with our comprehensive guide to cutting-edge procedures. Discover how combining advanced technologies with traditional techniques can provide superior results. From energy-based treatments to innovative injectables, learn about the latest solutions for maintaining youthful, radiant skin.",
-      image: "/images/temp/blog3.jpeg",
-      slug: "revolutionary-anti-aging-treatments",
-    },
-    {
-      id: 4,
-      title: "Understanding Body Contouring: Your Complete Guide",
-      excerpt:
-        "Dive deep into the world of body contouring procedures and learn how modern techniques can help sculpt your ideal silhouette. From non-invasive treatments to surgical options, we'll explore the full spectrum of body enhancement procedures. Understand the science behind different methods and how to choose the right approach for your goals.",
-      image: "/images/temp/blog4.jpeg",
-      slug: "understanding-body-contouring-guide",
-    },
-  ];
+interface AllBlogsProps {
+  serverBlogs: BlogPost[];
+}
 
-  // Animation variants
+export default function AllBlogs({ serverBlogs }: AllBlogsProps) {
+  // If there are no blogs, show the NoContent component
+  if (!serverBlogs || serverBlogs.length === 0) {
+    return (
+      <NoContent
+        title="No Blog Posts Available"
+        message="There are no blog posts added yet. Please check back later."
+        icon={
+          <BookOpenIcon size={48} style={{ color: theme.colors.primary }} />
+        }
+      />
+    );
+  }
+
   const sectionVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -169,7 +149,7 @@ export default function AllBlogs() {
           </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
+            {serverBlogs.map((post, index) => (
               <Link href={`/blog/${post.slug}`} key={post.id} className="block">
                 <motion.div
                   className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300"

@@ -10,7 +10,14 @@ export const reservationFormSchema = z.object({
     .string()
     .min(7, "Phone number must be at least 7 digits.")
     .regex(/^\d+$/, "Phone number must contain only digits."),
-  email: z.string().email("Invalid email address.").optional().nullable(),
+  email: z
+    .string()
+    .refine(
+      (val) => val === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+      "Invalid email address."
+    )
+    .optional()
+    .nullable(),
   date: z.date({
     required_error: "Please select a date for your reservation.",
   }),

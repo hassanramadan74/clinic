@@ -8,65 +8,59 @@ import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { motion, AnimatePresence } from "motion/react";
 import { theme } from "@/lib/theme";
+import { getReviews, Review as BackendReview } from "@/lib/reviews";
 
 interface Testimonial {
-  id: number;
+  id?: number;
   name: string;
   date: string;
   avatar: string;
   rating: number;
-  text: string;
-  verified?: boolean;
+  text: string | null;
 }
 
 export default function ReviewsSlider() {
-  const testimonials: Testimonial[] = [
-    {
-      id: 1,
-      name: "Emily Anderson",
-      date: "2024-04-11",
-      avatar: "",
-      rating: 5,
-      text: "Dr. Mohamed Elkholy is an exceptional plastic surgeon. His attention to detail and professional approach made me feel completely confident. The results of my rhinoplasty exceeded my expectations!",
-      verified: true,
-    },
-    {
-      id: 2,
-      name: "Michael Thompson",
-      date: "2024-04-09",
-      avatar: "",
-      rating: 5,
-      text: "I had an amazing experience with Dr. Elkholy for my facelift. His expertise and gentle demeanor put me at ease throughout the entire process. The results are incredibly natural-looking!",
-      verified: true,
-    },
-    {
-      id: 3,
-      name: "Sophia Martinez",
-      date: "2024-04-09",
-      avatar: "",
-      rating: 5,
-      text: "Dr. Elkholy's skill in body contouring is remarkable. He listened to all my concerns and delivered exactly what I wanted. The clinic staff was also incredibly supportive throughout my recovery.",
-      verified: true,
-    },
-    {
-      id: 4,
-      name: "James Wilson",
-      date: "2024-04-05",
-      avatar: "",
-      rating: 5,
-      text: "Choosing Dr. Mohamed Elkholy for my liposuction was the best decision. His surgical precision and commitment to patient care are outstanding. The results have boosted my confidence tremendously!",
-      verified: true,
-    },
-    {
-      id: 5,
-      name: "Sarah Roberts",
-      date: "2024-04-02",
-      avatar: "",
-      rating: 5,
-      text: "The breast augmentation procedure with Dr. Elkholy was life-changing. His state-of-the-art clinic, professional team, and exceptional surgical skills made the entire experience smooth and comfortable.",
-      verified: true,
-    },
-  ];
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<boolean>(false);
+
+  // Fetch reviews from backend
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        setIsLoading(true);
+        const reviews = await getReviews();
+
+        if (reviews) {
+          // Map backend review structure to our component's structure
+          const mappedReviews = reviews.map(
+            (review: BackendReview, index: number) => ({
+              id: index + 1,
+              name: review.name,
+              date:
+                review.publishAt ||
+                new Date(review.publishedAtDate).toLocaleDateString(),
+              avatar: review.photoUrl || "",
+              rating: review.stars,
+              text: review.text || "Great experience!",
+            })
+          );
+
+          setTestimonials(mappedReviews);
+          setError(false);
+        } else {
+          setError(true);
+        }
+      } catch (err) {
+        console.error("Error loading reviews:", err);
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchReviews();
+  }, []);
 
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const isTablet = useMediaQuery("(min-width: 640px)");
@@ -80,7 +74,11 @@ export default function ReviewsSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(getVisibleCount());
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
-  const maxIndex = testimonials.length - visibleCount;
+  const maxIndex = Math.max(0, testimonials.length - visibleCount);
+
+  // Swipe functionality for mobile - moved here to follow React Hook rules
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   useEffect(() => {
     setVisibleCount(getVisibleCount());
@@ -105,9 +103,10 @@ export default function ReviewsSlider() {
   //   return () => clearInterval(interval);
   // }, [currentIndex, maxIndex]);
 
-  // Swipe functionality for mobile
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
+  // If there's an error or no testimonials, don't render the component
+  if (error || (!isLoading && testimonials.length === 0)) {
+    return null;
+  }
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -248,6 +247,11 @@ export default function ReviewsSlider() {
     tap: { scale: 0.9 },
   };
 
+  // If there's an error or no testimonials, don't render the component
+  if (error || (!isLoading && testimonials.length === 0)) {
+    return null;
+  }
+
   return (
     <motion.section
       className="py-8 md:py-12 lg:py-16"
@@ -374,7 +378,7 @@ export default function ReviewsSlider() {
             </motion.button>
 
             <div className="flex justify-center gap-3 md:gap-6 overflow-hidden">
-              <AnimatePresence initial={false} custom={direction} mode="wait">
+              <AnimatePresence initial={false} custom={direction} mode="sync">
                 {testimonials
                   .slice(currentIndex, currentIndex + visibleCount)
                   .map((testimonial) => (
@@ -455,17 +459,6 @@ export default function ReviewsSlider() {
                             />
                           </motion.div>
                         ))}
-                        {testimonial.verified && (
-                          <motion.span
-                            className="ml-1 md:ml-2 text-white flex items-center justify-center text-[8px] md:text-xs w-4 h-4 md:w-5 md:h-5 rounded-full"
-                            style={{ backgroundColor: theme.colors.secondary }}
-                            initial={{ opacity: 0, scale: 0 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.9, type: "spring" }}
-                          >
-                            ✓
-                          </motion.span>
-                        )}
                       </motion.div>
 
                       <motion.p

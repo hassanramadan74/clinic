@@ -17,25 +17,25 @@ interface StatItem {
 
 const stats: StatItem[] = [
   {
-    value: 1500,
+    value: 1200,
     label: "Satisfied Patients",
     prefix: "+",
     icon: <Users size={24} />,
   },
   {
     value: 300,
-    label: "Injections Performed",
+    label: "procedure performed",
     prefix: "+",
     icon: <Activity size={24} />,
   },
   {
-    value: 100,
+    value: 90,
     label: "Conferences Attended",
     prefix: "+",
     icon: <Calendar size={24} />,
   },
   {
-    value: 15,
+    value: 13,
     label: "Years Of Experience",
     prefix: "+",
     icon: <Award size={24} />,

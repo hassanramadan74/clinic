@@ -100,7 +100,7 @@ function Hero({ details, showMoreDetails = true }: HeroProps) {
   return (
     <div
       className="relative w-full overflow-hidden"
-      style={{ backgroundColor: theme.colors.background, zIndex: 50 }}
+      style={{ backgroundColor: theme.colors.background, zIndex: 40 }}
     >
       <div className="container px-4 py-16 mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
@@ -122,7 +122,7 @@ function Hero({ details, showMoreDetails = true }: HeroProps) {
                 className="text-sm font-medium uppercase tracking-wider"
                 style={{ color: theme.colors.primary }}
               >
-                Expert Care
+                Expert Plastic Surgery & Aesthetic Excellence
               </span>
               <span
                 className="h-[1px] w-6"
@@ -197,13 +197,12 @@ function Hero({ details, showMoreDetails = true }: HeroProps) {
               <div
                 className="absolute inset-0 rounded-2xl"
                 style={{
-                  background: `linear-gradient(135deg, ${theme.colors.primaryLight}40, ${theme.colors.secondaryLight}40)`,
                   zIndex: 1,
                 }}
               ></div>
               <Image
                 src={details.image}
-                alt="Dr. Rehab Zakaria"
+                alt="Dr. Mohamed Elkholy"
                 width={500}
                 height={600}
                 className="object-cover relative z-0"

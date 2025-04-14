@@ -42,6 +42,7 @@ export default function Navbar() {
             alt="Elkholy Logo"
             width={150}
             height={150}
+            priority
             // className="h-20 w-20"
           />
         </Link>
@@ -75,6 +76,7 @@ export default function Navbar() {
                   alt="elkholy"
                   width={100}
                   height={100}
+                  priority
                   // className="h-8 w-8"
                 />
               </Link>
